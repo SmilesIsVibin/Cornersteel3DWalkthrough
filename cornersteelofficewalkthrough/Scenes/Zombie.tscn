@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://ubreaxn1csya"]
+
+[ext_resource type="Script" path="res://Scripts/Zombie.gd" id="1_qd3vu"]
+[ext_resource type="ArrayMesh" uid="uid://dr172jo0vu7f8" path="res://Assets/Others/Zombie_Schoolgirl_01.obj" id="2_d7s4r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_taor5"]
+albedo_color = Color(0.334277, 0.468414, 0.270929, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4sbsj"]
+albedo_color = Color(0.72646, 0.658227, 0.301871, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cp72"]
+albedo_color = Color(0.785005, 0.80416, 0.607707, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rqro2"]
+radius = 2.0
+height = 8.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yty85"]
+radius = 4.498
+
+[node name="Zumbi" type="CharacterBody3D"]
+script = ExtResource("1_qd3vu")
+
+[node name="ZumbiBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.99439, 0, 0.211715, 0, 4, 0, -0.211715, 0, -3.99439, 0, -2.90809, 0)
+mesh = ExtResource("2_d7s4r")
+surface_material_override/0 = SubResource("StandardMaterial3D_taor5")
+surface_material_override/1 = SubResource("StandardMaterial3D_4sbsj")
+surface_material_override/2 = SubResource("StandardMaterial3D_1cp72")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118011, 2.82149, 0)
+shape = SubResource("CapsuleShape3D_rqro2")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00897264, 3.1437, 0.265891)
+shape = SubResource("SphereShape3D_yty85")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

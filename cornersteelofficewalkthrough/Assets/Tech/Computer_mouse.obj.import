@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d3q4nyu6tdx20"
+path="res://.godot/imported/Computer_mouse.obj-a6f24035d8beb2a4b8983b33765cc274.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Computer_mouse.obj-a6f24035d8beb2a4b8983b33765cc274.mesh"]
+
+source_file="res://Assets/Tech/Computer_mouse.obj"
+dest_files=["res://.godot/imported/Computer_mouse.obj-a6f24035d8beb2a4b8983b33765cc274.mesh", "res://.godot/imported/Computer_mouse.obj-a6f24035d8beb2a4b8983b33765cc274.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0wdmdchd8pum"]
+
+[ext_resource type="Texture2D" uid="uid://bhw2makmd81wv" path="res://Assets/Dev Textures/dev_cyan.png" id="1_tejqc"]
+[ext_resource type="Script" path="res://Scripts/door.gd" id="2_03ems"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ahkfr"]
+size = Vector3(0.5, 11.5, 8.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu2c7"]
+albedo_texture = ExtResource("1_tejqc")
+uv1_triplanar = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gmmq7"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 1.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d0wdu"]
+points = PackedVector3Array(-0.34127, -5.84127, -4.34127, 0.388889, 5.84127, 4.42063, -0.34127, 5.84127, 4.42063, 0.388889, -5.84127, 4.42063, 0.388889, 5.84127, -4.34127, -0.34127, 5.84127, -4.34127, -0.34127, -5.84127, 4.42063, 0.388889, -5.84127, -4.34127)
+
+[sub_resource type="Animation" id="Animation_e48sl"]
+resource_name = "Close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gllkq"]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k6h76"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ixmq"]
+_data = {
+"Close": SubResource("Animation_e48sl"),
+"Open": SubResource("Animation_gllkq"),
+"RESET": SubResource("Animation_k6h76")
+}
+
+[node name="RightHingeDoorRemake (General)" type="Node3D"]
+
+[node name="Hinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.505916)
+
+[node name="Main Door" type="MeshInstance3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.262084, 5.87835, 3.75951)
+mesh = SubResource("BoxMesh_ahkfr")
+surface_material_override/0 = SubResource("StandardMaterial3D_pu2c7")
+
+[node name="Knob" type="MeshInstance3D" parent="Hinge/Main Door"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0256855, 0, 3.33411)
+mesh = SubResource("CylinderMesh_gmmq7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Hinge/Main Door" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("2_03ems")
+animation_player = NodePath("../../../AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hinge/Main Door/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_d0wdu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7ixmq")
+}
