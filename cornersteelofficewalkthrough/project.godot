@@ -160,4 +160,7 @@ F_interact={
 [rendering]
 
 occlusion_culling/use_occlusion_culling=true
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
