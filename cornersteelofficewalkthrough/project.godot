@@ -18,9 +18,8 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1366
-window/size/viewport_height=768
-window/size/mode=2
+window/size/viewport_width=960
+window/size/viewport_height=360
 
 [input]
 
@@ -157,14 +156,13 @@ F_interact={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 global_illumination/gi/use_half_resolution=true
-anti_aliasing/quality/msaa_2d=1
-anti_aliasing/quality/msaa_3d=1
-anti_aliasing/quality/use_taa=true
+environment/ssao/quality=0
+environment/ssil/quality=0
+environment/glow/upscale_mode=0
+environment/screen_space_reflection/roughness_quality=0
+environment/subsurface_scattering/subsurface_scattering_quality=0
+environment/volumetric_fog/use_filter=0
 occlusion_culling/use_occlusion_culling=true
-lights_and_shadows/quality/use_taa=false
-lights_and_shadows/quality/msaa_2d=0
-lights_and_shadows/quality/msaa_3d=0
-lights_and_shadows/gi/use_half_resolution=false
+lights_and_shadows/gi/use_half_resolution=true
+lights_and_shadows/quality/msaa_3d=2
