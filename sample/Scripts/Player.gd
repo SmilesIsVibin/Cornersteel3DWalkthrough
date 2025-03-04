@@ -110,6 +110,7 @@ func toggle_noclip():
 		is_noclip = !is_noclip
 		if is_noclip:
 			collision_shape.disabled = true
+			velocity = Vector3.ZERO
 			# Move the player slightly upward to add feedback when enabling noclip
 			position.y += 0.5
 		else:
@@ -131,7 +132,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			mouse_delta.y = - event.relative.y * mouse_sensitivity
 			
 func is_moving() -> bool:
-	return move_vector.length() > 0.1 # adjust as needed
+	return velocity.length() > 0.1 # adjust as needed
 	
 func hide_cursor():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
