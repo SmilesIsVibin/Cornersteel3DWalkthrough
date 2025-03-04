@@ -1,0 +1,137 @@
+[gd_scene load_steps=6 format=3 uid="uid://bf1ogejo0mbyw"]
+
+[ext_resource type="Script" path="res://ForImport/Script/settings.gd" id="1_p76gq"]
+[ext_resource type="PackedScene" uid="uid://8e4cse562kxx" path="res://ForImport/SCENE/window_mode.tscn" id="2_c4kik"]
+[ext_resource type="PackedScene" uid="uid://d0y00m2x664om" path="res://MasterSlider.tscn" id="2_vnn7b"]
+[ext_resource type="PackedScene" uid="uid://d4dxdhs8spohl" path="res://ForImport/SCENE/reso_.tscn" id="3_0a7lx"]
+[ext_resource type="PackedScene" uid="uid://dy3th0rod80kb" path="res://ForImport/SCENE/fps_buttons.tscn" id="4_eavex"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p76gq")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -150.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 0
+
+[node name="Sounds" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sounds/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="SliderMaster" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Music" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+layout_mode = 2
+size_flags_horizontal = 4
+bus_name = "MUSIC"
+
+[node name="SFX" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+layout_mode = 2
+size_flags_horizontal = 4
+bus_name = "SFX"
+
+[node name="Video" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Video/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 65
+alignment = 1
+
+[node name="WindowMode" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("2_c4kik")]
+layout_mode = 2
+
+[node name="Reso_" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("3_0a7lx")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="Stats" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("4_eavex")]
+layout_mode = 2
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sensitivity"
+
+[node name="HSlider2" type="HSlider" parent="TabContainer/Controls/MarginContainer/VBoxContainer/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -219.5
+offset_top = -10.5
+offset_right = 219.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2

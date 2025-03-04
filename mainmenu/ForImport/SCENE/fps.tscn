@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cig6jdopat22v"]
+
+[ext_resource type="Script" path="res://ForImport/Script/fps.gd" id="1_x5yl3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqcul"]
+bg_color = Color(0, 0, 0, 0.422)
+
+[node name="FPS" type="ColorRect"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+script = ExtResource("1_x5yl3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -102.0
+offset_bottom = 40.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_nqcul")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "FPS: 100
+"
