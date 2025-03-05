@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://1mp12gpjya1v"]
 
-[ext_resource type="Script" path="res://Player Related Objects/character_body_3d.gd" id="1_6sqpv"]
-[ext_resource type="Script" path="res://Scripts/raycast.gd" id="2_86igy"]
+[ext_resource type="Script" uid="uid://dkkqt1ifjp3m0" path="res://Player Related Objects/character_body_3d.gd" id="1_6sqpv"]
+[ext_resource type="Script" uid="uid://cxbb8hq2tvy6c" path="res://Scripts/raycast.gd" id="2_86igy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6nfjj"]
 

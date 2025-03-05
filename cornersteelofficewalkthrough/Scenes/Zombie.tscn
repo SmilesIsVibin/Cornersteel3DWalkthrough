@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ubreaxn1csya"]
 
-[ext_resource type="Script" path="res://Scripts/Zombie.gd" id="1_qd3vu"]
+[ext_resource type="Script" uid="uid://dq3r443ye30jp" path="res://Scripts/Zombie.gd" id="1_qd3vu"]
 [ext_resource type="ArrayMesh" uid="uid://dr172jo0vu7f8" path="res://Assets/Others/Zombie_Schoolgirl_01.obj" id="2_d7s4r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_taor5"]

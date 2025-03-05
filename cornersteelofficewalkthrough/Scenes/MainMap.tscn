@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://dq7pqsxq8ro4v"]
+[gd_scene load_steps=20 format=3 uid="uid://dq7pqsxq8ro4v"]
 
 [ext_resource type="Texture2D" uid="uid://d4hqhleoel3k1" path="res://Blueprint/Another_blueprint_upscale.png" id="1_4lpkh"]
 [ext_resource type="PackedScene" uid="uid://1mp12gpjya1v" path="res://Player Related Objects/characterbody3d.tscn" id="2_7rqyg"]
 [ext_resource type="ArrayOccluder3D" uid="uid://c5wdsk80d4wlw" path="res://Scenes/MainMap.occ" id="8_14c6a"]
 [ext_resource type="VoxelGIData" uid="uid://c5ljow88f4jjx" path="res://Scenes/MainMap.VoxelGI_data.res" id="8_dtdtw"]
-[ext_resource type="Script" path="res://Scenes/canvas_layer.gd" id="9_nskn7"]
-[ext_resource type="Script" path="res://Scripts/crosshair.gd" id="13_gegwu"]
+[ext_resource type="PackedScene" uid="uid://fc788pex4qwc" path="res://Scenes/day_night_test.tscn" id="8_v2ie4"]
+[ext_resource type="LightmapGIData" uid="uid://8mwnawenqinh" path="res://Scenes/MainMap.lmbake" id="9_l8a21"]
+[ext_resource type="Script" uid="uid://jrbityjvdlik" path="res://Scenes/canvas_layer.gd" id="9_nskn7"]
+[ext_resource type="Script" uid="uid://ba4agxp2jliut" path="res://Scripts/crosshair.gd" id="13_gegwu"]
 [ext_resource type="PackedScene" uid="uid://dlvkngslka08j" path="res://Scenes/cornersteel_office_environment_up_scaled.tscn" id="23_53ips"]
 [ext_resource type="PackedScene" uid="uid://x5bd7j776g0d" path="res://FurnitureScenes/left_hinge_door_remake_(general).tscn" id="23_ecu6j"]
 [ext_resource type="PackedScene" uid="uid://d0wdmdchd8pum" path="res://FurnitureScenes/right_hinge_door_remake_(general).tscn" id="24_5gf3k"]
@@ -19,14 +21,20 @@ albedo_texture = ExtResource("1_4lpkh")
 
 [sub_resource type="Theme" id="Theme_q6a5g"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jefxw"]
-sky_top_color = Color(0.353455, 0.551668, 0.711574, 1)
-sky_horizon_color = Color(0.760384, 0.789822, 0.706349, 1)
-sky_curve = 0.0675939
+[sub_resource type="Gradient" id="Gradient_v2ie4"]
+colors = PackedColorArray(0.811026, 0.78371, 0.766124, 1, 0.205077, 0.202919, 0.165828, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ftth4"]
+gradient = SubResource("Gradient_v2ie4")
+fill_from = Vector2(0.987013, 0.743506)
+fill_to = Vector2(1, 0.269481)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qp6sq"]
+night_sky = SubResource("GradientTexture2D_ftth4")
 
 [sub_resource type="Sky" id="Sky_rlahn"]
 resource_local_to_scene = true
-sky_material = SubResource("ProceduralSkyMaterial_jefxw")
+sky_material = SubResource("PhysicalSkyMaterial_qp6sq")
 radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_dh4cs"]
@@ -37,7 +45,6 @@ ambient_light_color = Color(0.647395, 0.647395, 0.647395, 1)
 ambient_light_sky_contribution = 0.75
 tonemap_mode = 3
 tonemap_exposure = 0.75
-ssao_enabled = true
 ssao_radius = 2.0
 ssao_intensity = 3.5
 ssao_power = 0.95592
@@ -231,8 +238,15 @@ text = "Cornersteel IT Lounge"
 
 [node name="CornersteelOfficeEnvironment_UpScaled" parent="." instance=ExtResource("23_53ips")]
 
+[node name="OfficeRoof" parent="CornersteelOfficeEnvironment_UpScaled" index="285"]
+visible = false
+
+[node name="DayNightTest" parent="." instance=ExtResource("8_v2ie4")]
+transform = Transform3D(0.828823, 0.167727, -0.533779, 0, 0.95401, 0.299774, 0.559511, -0.248459, 0.790706, 0, 11.1817, 0)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.828823, 0.167727, -0.53378, 0, 0.95401, 0.299773, 0.559511, -0.248459, 0.790706, 0, 11.1817, 0)
+visible = false
 light_energy = 0.5
 light_indirect_energy = 0.75
 light_bake_mode = 1
@@ -507,17 +521,18 @@ omni_attenuation = 0.75
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7943, 8.31818, -29.2985)
 occluder = ExtResource("8_14c6a")
 
-[node name="VoxelGI" type="VoxelGI" parent="."]
+[node name="LightmapGI" type="LightmapGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7943, 8.31818, -29.2985)
 visible = false
+shadowmask_mode = 1
+interior = true
+denoiser_strength = 0.5
+light_data = ExtResource("9_l8a21")
+
+[node name="VoxelGI" type="VoxelGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7943, 8.31818, -29.2985)
 subdiv = 2
 size = Vector3(422.173, 41.0612, 352.521)
 data = ExtResource("8_dtdtw")
 
-[node name="LightmapGI" type="LightmapGI" parent="VoxelGI"]
-quality = 0
-interior = true
-denoiser_range = 5
-bias = 0.05
-max_texture_size = 8192
-generate_probes_subdiv = 1
+[editable path="CornersteelOfficeEnvironment_UpScaled"]

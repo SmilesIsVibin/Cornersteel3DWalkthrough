@@ -1,0 +1,102 @@
+[gd_scene load_steps=4 format=3 uid="uid://fc788pex4qwc"]
+
+[sub_resource type="Animation" id="Animation_fvrb1"]
+resource_name = "DayNightCycle"
+length = 15.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.28319, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 8.76667, 15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.4, 0.25, 1.0, 0.75]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:light_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 8.76667, 15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.466309, 0.354231, 0.203217, 1), Color(0.910641, 0.887764, 0.870038, 1), Color(0.466309, 0.354231, 0.203217, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x2dm5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.75]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:light_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.466309, 0.354231, 0.203217, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_evkx2"]
+_data = {
+&"DayNightCycle": SubResource("Animation_fvrb1"),
+&"RESET": SubResource("Animation_x2dm5")
+}
+
+[node name="DayNightTest" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 94.53, 0)
+light_color = Color(0.466309, 0.354231, 0.203217, 1)
+light_energy = 0.75
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DirectionalLight3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_evkx2")
+}
+autoplay = "DayNightCycle"

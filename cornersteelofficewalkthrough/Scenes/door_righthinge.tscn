@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bvce74utol7dn"]
 
-[ext_resource type="Script" path="res://Scripts/door.gd" id="1_xq6s1"]
+[ext_resource type="Script" uid="uid://di7dkwxweeail" path="res://Scripts/door.gd" id="1_xq6s1"]
 [ext_resource type="Texture2D" uid="uid://bhw2makmd81wv" path="res://Assets/Dev Textures/dev_cyan.png" id="2_moo56"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dwaok"]
@@ -58,9 +58,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n5mv8"]
 _data = {
-"Close": SubResource("Animation_mwv3m"),
-"Open": SubResource("Animation_3y5to"),
-"RESET": SubResource("Animation_jc5xr")
+&"Close": SubResource("Animation_mwv3m"),
+&"Open": SubResource("Animation_3y5to"),
+&"RESET": SubResource("Animation_jc5xr")
 }
 
 [node name="DoorTestLeftHinge" type="Node3D"]

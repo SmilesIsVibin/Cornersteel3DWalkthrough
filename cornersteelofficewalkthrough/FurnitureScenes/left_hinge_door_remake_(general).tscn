@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://x5bd7j776g0d"]
 
 [ext_resource type="Texture2D" uid="uid://bhw2makmd81wv" path="res://Assets/Dev Textures/dev_cyan.png" id="1_yh4xm"]
-[ext_resource type="Script" path="res://Scripts/door.gd" id="2_nn7b4"]
+[ext_resource type="Script" uid="uid://di7dkwxweeail" path="res://Scripts/door.gd" id="2_nn7b4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2nwth"]
 size = Vector3(0.5, 11.5, 8.5)
@@ -65,9 +65,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wog46"]
 _data = {
-"Close": SubResource("Animation_157vf"),
-"Open": SubResource("Animation_jjlcg"),
-"RESET": SubResource("Animation_1rnqb")
+&"Close": SubResource("Animation_157vf"),
+&"Open": SubResource("Animation_jjlcg"),
+&"RESET": SubResource("Animation_1rnqb")
 }
 
 [node name="LeftHingeDoorRemake (General)" type="Node3D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://d1dic2uvagt2k"]
 
-[ext_resource type="Script" path="res://Scripts/door.gd" id="1_43d43"]
+[ext_resource type="Script" uid="uid://di7dkwxweeail" path="res://Scripts/door.gd" id="1_43d43"]
 [ext_resource type="Texture2D" uid="uid://bhw2makmd81wv" path="res://Assets/Dev Textures/dev_cyan.png" id="1_fvgfe"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_dwaok"]
@@ -57,9 +57,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n5mv8"]
 _data = {
-"Close": SubResource("Animation_xbwsh"),
-"Open": SubResource("Animation_r656a"),
-"RESET": SubResource("Animation_sd1uk")
+&"Close": SubResource("Animation_xbwsh"),
+&"Open": SubResource("Animation_r656a"),
+&"RESET": SubResource("Animation_sd1uk")
 }
 
 [node name="DoorTest" type="Node3D"]
