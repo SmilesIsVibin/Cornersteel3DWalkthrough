@@ -1,11 +1,13 @@
 extends Control
 
-@onready var settings = $"../../../../.." # Adjust based on your scene tree
-@export var Fps: ColorRect
-@onready var Bt_txt = $HBoxContainer/Button as Button
-var save_path: String = "user://settings.json"
 
-var FPSOn: bool = false
+@export var Bt_txt : Button
+
+var FPSOn: bool = true
+
+@export var light = DirectionalLight3D
+var save_path: String = "user://settings.json"
+#signal FPS_OFF
 
 func _ready() -> void:
 	load_settings()
@@ -13,15 +15,21 @@ func _ready() -> void:
 
 func update_button_text() -> void:
 	Bt_txt.text = "ON" if FPSOn else "OFF"
+	
 
 func _on_button_pressed() -> void:
 	FPSOn = !FPSOn  # Toggle FPS state
-	save_settings()
 	update_button_text()
-	settings.set_fps_ui(FPSOn)
+	save_settings()
+	if FPSOn:
+		light.shadow_enabled = true
+		print("ShadowON")
+	else:
+		light.shadow_enabled = false
+		print("ShadowOff")
 
 func save_settings() -> void:
-	var settings_dict: Dictionary = {}  # Create a separate dictionary for saving
+	var settings_data: Dictionary = {}
 	
 	var file = FileAccess
 	# Load existing settings if the file exists
@@ -32,14 +40,14 @@ func save_settings() -> void:
 		
 		var parsed = JSON.parse_string(json_data)
 		if parsed is Dictionary:
-			settings_dict = parsed  # Keep previous settings
+			settings_data = parsed  # Keep previous settings
 
-	# Update only the FPSOn value
-	settings_dict["FPSOn1"] = FPSOn  
+	# Update only the FPS setting
+	settings_data["Shadow"] = FPSOn  
 
 	# Save the updated settings back to file
 	file = FileAccess.open(save_path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(settings_dict, "\t"))  # Pretty format JSON
+	file.store_string(JSON.stringify(settings_data, "\t"))  # Pretty format JSON
 	file.close()
 
 func load_settings() -> void:
@@ -52,7 +60,11 @@ func load_settings() -> void:
 
 	var parsed = JSON.parse_string(json_data)
 	if parsed is Dictionary:
-		FPSOn = parsed.get("FPSOn1", true)
-
-	update_button_text()
-	settings.set_fps_ui(FPSOn)
+		FPSOn = parsed.get("Shadow", false)
+		
+	if FPSOn:
+		light.shadow_enabled = true
+		print("ShadowON")
+	else:
+		light.shadow_enabled = false
+		print("ShadowOff")

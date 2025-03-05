@@ -1,42 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf1ogejo0mbyw"]
+[gd_scene load_steps=8 format=3 uid="uid://t4f1tatiqs2d"]
 
-[ext_resource type="PackedScene" uid="uid://8e4cse562kxx" path="res://ForImport/SCENE/window_mode.tscn" id="2_c4kik"]
-[ext_resource type="PackedScene" uid="uid://d0y00m2x664om" path="res://ForImport/SCENE/MasterSlider.tscn" id="2_vnn7b"]
-[ext_resource type="PackedScene" uid="uid://d4dxdhs8spohl" path="res://ForImport/SCENE/reso_.tscn" id="3_0a7lx"]
-[ext_resource type="PackedScene" uid="uid://dy3th0rod80kb" path="res://ForImport/SCENE/fps_buttons.tscn" id="4_eavex"]
-[ext_resource type="PackedScene" uid="uid://bj4odese28ifh" path="res://ForImport/SCENE/VSYNC.tscn" id="6_ov011"]
-[ext_resource type="PackedScene" uid="uid://c2xdloidy2a48" path="res://ForImport/SCENE/Shadwo.tscn" id="7_p6hi2"]
+[ext_resource type="PackedScene" uid="uid://d0y00m2x664om" path="res://ForImport/SCENE/MasterSlider.tscn" id="1_5yvjv"]
+[ext_resource type="Script" path="res://ForImport/Script/pause.gd" id="1_ibwkm"]
+[ext_resource type="PackedScene" uid="uid://8e4cse562kxx" path="res://ForImport/SCENE/window_mode.tscn" id="2_n1tgv"]
+[ext_resource type="PackedScene" uid="uid://d4dxdhs8spohl" path="res://ForImport/SCENE/reso_.tscn" id="3_0fddj"]
+[ext_resource type="PackedScene" uid="uid://bromkf6jxo665" path="res://ForImport/SCENE/PausFPS.tscn" id="5_25wjp"]
+[ext_resource type="PackedScene" uid="uid://bj4odese28ifh" path="res://ForImport/SCENE/VSYNC.tscn" id="5_synjs"]
+[ext_resource type="PackedScene" uid="uid://c2xdloidy2a48" path="res://ForImport/SCENE/Shadwo.tscn" id="6_h62pi"]
 
-[sub_resource type="GDScript" id="GDScript_jbni2"]
-script/source = "extends Control
-
-@onready var MainMenu = get_node(\"/root/MainMenu\")  # Adjust the path based on your scene hierarchy
-var FPSUI: bool = false
-
-# Function to modify FPSUI from FPSToggle
-func set_fps_ui(value: bool) -> void:
-	FPSUI = value
-	print(\"FPSUI set to:\", FPSUI)
-
-func _process(_delta: float) -> void:
-	UI_Set_MainMenu()
-
-# Function to interact with MainMenu
-func UI_Set_MainMenu() -> void:
-	if MainMenu:
-		MainMenu.set_fps_ui1(FPSUI)
-	else:
-		print(\"Error: MainMenu node not found!\")
-"
-
-[node name="Settings" type="Control"]
+[node name="Pause" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_jbni2")
+script = ExtResource("1_ibwkm")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -50,9 +29,10 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Sounds" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -73,22 +53,21 @@ layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
 
-[node name="SliderMaster" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+[node name="SliderMaster" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("1_5yvjv")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Music" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+[node name="Music" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("1_5yvjv")]
 layout_mode = 2
 size_flags_horizontal = 4
 bus_name = "MUSIC"
 
-[node name="SFX" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+[node name="SFX" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("1_5yvjv")]
 layout_mode = 2
 size_flags_horizontal = 4
 bus_name = "SFX"
 
 [node name="Video" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -109,20 +88,20 @@ layout_mode = 2
 theme_override_constants/separation = 65
 alignment = 1
 
-[node name="WindowMode" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("2_c4kik")]
+[node name="WindowMode" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("2_n1tgv")]
 layout_mode = 2
 
-[node name="Reso_" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("3_0a7lx")]
+[node name="Reso_" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("3_0fddj")]
 layout_mode = 2
 size_flags_horizontal = 1
 
-[node name="Stats" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("4_eavex")]
+[node name="FPS" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("5_25wjp")]
 layout_mode = 2
 
-[node name="Vsync" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("6_ov011")]
+[node name="Vsync" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("5_synjs")]
 layout_mode = 2
 
-[node name="Shadow" parent="TabContainer/Video/MarginContainer/VBoxContainer" node_paths=PackedStringArray("light") instance=ExtResource("7_p6hi2")]
+[node name="Shadow" parent="TabContainer/Video/MarginContainer/VBoxContainer" node_paths=PackedStringArray("light") instance=ExtResource("6_h62pi")]
 layout_mode = 2
 light = NodePath("../../../../../DirectionalLight3D")
 

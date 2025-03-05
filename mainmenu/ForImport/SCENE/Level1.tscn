@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://dlhrauupcihme"]
+[gd_scene load_steps=3 format=3 uid="uid://dlhrauupcihme"]
+
+[ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://ForImport/SCENE/fps.tscn" id="1_84kkc"]
+[ext_resource type="PackedScene" uid="uid://t4f1tatiqs2d" path="res://ForImport/SCENE/Pause.tscn" id="2_ehq8x"]
 
 [node name="Level1" type="Node3D"]
+
+[node name="FPS" parent="." instance=ExtResource("1_84kkc")]
+
+[node name="Pause" parent="." node_paths=PackedStringArray("Fps") instance=ExtResource("2_ehq8x")]
+Fps = NodePath("../FPS")

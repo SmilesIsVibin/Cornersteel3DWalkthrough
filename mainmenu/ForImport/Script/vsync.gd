@@ -1,11 +1,9 @@
 extends Control
 
-@onready var settings = $"../../../../.." # Adjust based on your scene tree
-@export var Fps: ColorRect
-@onready var Bt_txt = $HBoxContainer/Button as Button
-var save_path: String = "user://settings.json"
+@export var Bt_txt: Button
 
 var FPSOn: bool = false
+var save_path: String = "user://settings.json"
 
 func _ready() -> void:
 	load_settings()
@@ -16,12 +14,18 @@ func update_button_text() -> void:
 
 func _on_button_pressed() -> void:
 	FPSOn = !FPSOn  # Toggle FPS state
-	save_settings()
 	update_button_text()
-	settings.set_fps_ui(FPSOn)
+	save_settings()
+	
+	if FPSOn:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		print("FPS - 60")
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		print("FPS + 60")
 
 func save_settings() -> void:
-	var settings_dict: Dictionary = {}  # Create a separate dictionary for saving
+	var settings: Dictionary = {}
 	
 	var file = FileAccess
 	# Load existing settings if the file exists
@@ -32,14 +36,14 @@ func save_settings() -> void:
 		
 		var parsed = JSON.parse_string(json_data)
 		if parsed is Dictionary:
-			settings_dict = parsed  # Keep previous settings
+			settings = parsed  # Keep previous settings
 
 	# Update only the FPSOn value
-	settings_dict["FPSOn1"] = FPSOn  
+	settings["FPSOn"] = FPSOn  
 
 	# Save the updated settings back to file
 	file = FileAccess.open(save_path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(settings_dict, "\t"))  # Pretty format JSON
+	file.store_string(JSON.stringify(settings, "\t"))  # Pretty format JSON
 	file.close()
 
 func load_settings() -> void:
@@ -52,7 +56,15 @@ func load_settings() -> void:
 
 	var parsed = JSON.parse_string(json_data)
 	if parsed is Dictionary:
-		FPSOn = parsed.get("FPSOn1", true)
+		FPSOn = parsed.get("FPSOn", false)  # Default to false if not found
 
+	# Ensure the UI button updates correctly
 	update_button_text()
-	settings.set_fps_ui(FPSOn)
+
+	# Apply the saved VSync mode
+	if FPSOn:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+		print("FPS - 60 (Loaded)")
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+		print("FPS + 60 (Loaded)")
