@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://rob7iqq7nifs"]
 
-[ext_resource type="Script" path="res://Scripts/Door.gd" id="1_a7dck"]
+[ext_resource type="Script" path="res://Scripts/door.gd" id="1_8l7dl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_japry"]
 size = Vector3(2, 3, 0.5)
@@ -68,7 +68,8 @@ _data = {
 [node name="Door Holder" type="Node3D"]
 
 [node name="Door Pivot" type="StaticBody3D" parent="." groups=["Interactable"]]
-script = ExtResource("1_a7dck")
+script = ExtResource("1_8l7dl")
+prompt_message = "Door"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Door Pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 0)
@@ -83,3 +84,5 @@ shape = SubResource("BoxShape3D_npn6l")
 libraries = {
 "": SubResource("AnimationLibrary_usqu2")
 }
+
+[connection signal="interacted" from="Door Pivot" to="Door Pivot" method="_on_interacted"]

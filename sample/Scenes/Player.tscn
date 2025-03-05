@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cu1oiwt353ycd"]
+[gd_scene load_steps=8 format=3 uid="uid://cu1oiwt353ycd"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_gjo2e"]
-[ext_resource type="Script" path="res://Scripts/Bobbing.gd" id="2_lpiwy"]
-[ext_resource type="Script" path="res://Scripts/Interaction.gd" id="3_d4n4i"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_gjo2e"]
+[ext_resource type="Script" path="res://Scripts/bobbing.gd" id="2_lpiwy"]
+[ext_resource type="Script" path="res://Scripts/interaction.gd" id="3_d4n4i"]
 [ext_resource type="Texture2D" uid="uid://8h2xvo6d3xoi" path="res://Crosshair/Crosshair 3.png" id="4_jkghp"]
+[ext_resource type="Script" path="res://Scripts/ui_control.gd" id="4_ld81f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7kcx2"]
 
@@ -30,12 +31,11 @@ script = ExtResource("2_lpiwy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 current = true
 
-[node name="RayCast3D" type="RayCast3D" parent="TwistPivot/PitchPivot/Camera Bobbing/Camera3D" node_paths=PackedStringArray("prompt_text")]
+[node name="RayCast3D" type="RayCast3D" parent="TwistPivot/PitchPivot/Camera Bobbing/Camera3D"]
 target_position = Vector3(0, 0, -3.5)
 script = ExtResource("3_d4n4i")
-prompt_text = NodePath("../../../../../Player Interface/Prompt Text")
 
-[node name="Player Interface" type="Control" parent="."]
+[node name="PlayerInterface" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,8 +43,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("4_ld81f")
 
-[node name="Crosshair" type="TextureRect" parent="Player Interface"]
+[node name="Crosshair" type="TextureRect" parent="PlayerInterface"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -61,7 +62,7 @@ mouse_force_pass_scroll_events = false
 texture = ExtResource("4_jkghp")
 expand_mode = 1
 
-[node name="Prompt Text" type="Label" parent="Player Interface"]
+[node name="PromptText" type="Label" parent="PlayerInterface"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,19 +75,101 @@ offset_right = 120.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Interact"
+text = "Door e"
 
-[node name="Control Guide" type="Label" parent="Player Interface"]
+[node name="ControlText" type="Label" parent="PlayerInterface"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -127.0
-offset_right = 176.0
+offset_top = -23.0
+offset_right = 105.0
 grow_vertical = 0
-text = "WASD -   MOVE
-MOUSE - ROTATE
-E - INTERACT
-SHIFT + WASD - SPRINT
-N - NOCLIP
-ESC - EXIT GAME"
+text = "[TAB] / [BACK] TO SHOW CONTROLS"
+
+[node name="ControlGuidePanel" type="Panel" parent="PlayerInterface"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 175.0
+offset_top = 150.0
+offset_right = -156.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control Guide" type="Label" parent="PlayerInterface/ControlGuidePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.5
+offset_top = -169.0
+offset_right = -266.5
+offset_bottom = -146.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CONTROL GUIDE"
+
+[node name="GridContainer" type="GridContainer" parent="PlayerInterface/ControlGuidePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -111.0
+offset_right = 297.5
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 120
+columns = 3
+
+[node name="Action Text" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "ACTIONS
+
+MOVE
+ROTATE
+JUMP
+SPRINT
+INTERACT
+NOCLIP
+EXIT"
+horizontal_alignment = 1
+
+[node name="Pc Control" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PC
+
+WASD
+MOUSE
+SPACE
+WASD + LEFT SHIFT
+E
+N
+ESC"
+horizontal_alignment = 1
+
+[node name="Controller Control" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CONTROLLER
+
+LEFT STICK
+RIGHT STICK
+A
+WASD + LEFT STICK CLICK
+X
+Y
+START"
+horizontal_alignment = 1

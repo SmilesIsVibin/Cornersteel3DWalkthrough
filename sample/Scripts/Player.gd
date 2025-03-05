@@ -7,7 +7,7 @@ extends CharacterBody3D
 @export var sprint_speed : float = 8.0 # how fast the sprinting is
 
 @export_category("CAMERA SETTINGS")
-@export var mouse_sensitivity : float = 0.001 # how fast the camera rotation will be
+@export var sensitivity : float = 0.001 # how fast the camera rotation will be
 @export var max_look_limit : float = 80.0 # max limit the character can look up and dowm
 
 @export_category("SMOOTHING EFFECT")
@@ -88,7 +88,7 @@ func handle_jumping(delta):
 	if not is_noclip and not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump_key") and is_on_floor():
 		velocity.y = jump_height
 		
 func handle_noclip(delta):
@@ -106,7 +106,7 @@ func handle_noclip(delta):
 	
 func toggle_noclip():
 	# Toggle nocli[ on and off using N key
-	if Input.is_action_just_pressed("noclip_toggle"):
+	if Input.is_action_just_pressed("noclip_key"):
 		is_noclip = !is_noclip
 		if is_noclip:
 			collision_shape.disabled = true
@@ -128,9 +128,17 @@ func get_movement_input() -> Vector3:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			mouse_delta.x = - event.relative.x * mouse_sensitivity
-			mouse_delta.y = - event.relative.y * mouse_sensitivity
-			
+			mouse_delta += -event.relative * sensitivity
+
+	# Combine right stick input
+	var look_input = Vector2(
+		Input.get_axis("look_left", "look_right"),
+		Input.get_axis("look_down", "look_up")
+	)
+
+	# Apply sensitivity and add to mouse_delta
+	mouse_delta += look_input * sensitivity
+	
 func is_moving() -> bool:
 	return velocity.length() > 0.1 # adjust as needed
 	
@@ -138,5 +146,5 @@ func hide_cursor():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func exit_game():
-	if Input.is_action_pressed("ui_cancel"):
+	if Input.is_action_pressed("exit_key"):
 		get_tree().quit()  # Exit the game

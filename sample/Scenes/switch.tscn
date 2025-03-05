@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://berck6m7olvin"]
+
+[ext_resource type="Script" path="res://Scripts/switch.gd" id="1_4xdlg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1e3p"]
+albedo_color = Color(0.852076, 0.470449, 0.480757, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hun6u"]
+material = SubResource("StandardMaterial3D_m1e3p")
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_arvyu"]
+size = Vector3(1, 0.5, 1)
+
+[node name="Switch" type="StaticBody3D"]
+script = ExtResource("1_4xdlg")
+prompt_message = "Switch"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hun6u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_arvyu")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+light_color = Color(0.999999, 0.994383, 0.53585, 1)
+light_energy = 2.0
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]

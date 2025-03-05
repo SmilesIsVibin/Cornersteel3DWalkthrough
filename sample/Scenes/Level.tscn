@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b648wwgqds5cm"]
+[gd_scene load_steps=11 format=3 uid="uid://b648wwgqds5cm"]
 
-[ext_resource type="PackedScene" uid="uid://cu1oiwt353ycd" path="res://Scenes/Player.tscn" id="1_xhf4m"]
-[ext_resource type="PackedScene" uid="uid://rob7iqq7nifs" path="res://Scenes/Door.tscn" id="3_atpo7"]
+[ext_resource type="PackedScene" uid="uid://cu1oiwt353ycd" path="res://Scenes/player.tscn" id="1_yvwia"]
+[ext_resource type="PackedScene" uid="uid://rob7iqq7nifs" path="res://Scenes/door.tscn" id="2_oeb7k"]
+[ext_resource type="PackedScene" uid="uid://berck6m7olvin" path="res://Scenes/switch.tscn" id="3_v4ltf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tl5s6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,11 +51,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_qse77")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_7g76u")
 
-[node name="Player" parent="." instance=ExtResource("1_xhf4m")]
+[node name="Player" parent="." instance=ExtResource("1_yvwia")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.855783, 0)
 
-[node name="Door Holder" parent="." groups=["Interactable"] instance=ExtResource("3_atpo7")]
+[node name="Door Holder" parent="." groups=["Interactable"] instance=ExtResource("2_oeb7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47544, -0.144217, -5.78616)
 
-[node name="Door Holder2" parent="." groups=["Interactable"] instance=ExtResource("3_atpo7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02456, -0.144217, -5.78616)
+[node name="Switch" parent="." instance=ExtResource("3_v4ltf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -6)
