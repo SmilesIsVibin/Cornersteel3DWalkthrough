@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://cu1oiwt353ycd"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_gjo2e"]
-[ext_resource type="Script" path="res://Scripts/bobbing.gd" id="2_lpiwy"]
-[ext_resource type="Script" path="res://Scripts/interaction.gd" id="3_d4n4i"]
-[ext_resource type="Texture2D" uid="uid://8h2xvo6d3xoi" path="res://Crosshair/Crosshair 3.png" id="4_jkghp"]
-[ext_resource type="Script" path="res://Scripts/ui_control.gd" id="4_ld81f"]
+[ext_resource type="Script" path="res://FPS/Scripts/player.gd" id="1_gjo2e"]
+[ext_resource type="Script" path="res://FPS/Scripts/bobbing.gd" id="2_lpiwy"]
+[ext_resource type="Script" path="res://FPS/Scripts/interaction.gd" id="3_d4n4i"]
+[ext_resource type="Texture2D" uid="uid://8h2xvo6d3xoi" path="res://FPS/Crosshair/Crosshair 3.png" id="4_jkghp"]
+[ext_resource type="Script" path="res://FPS/Scripts/ui_control.gd" id="4_ld81f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7kcx2"]
 
@@ -24,14 +24,14 @@ shape = SubResource("CapsuleShape3D_nk75x")
 
 [node name="PitchPivot" type="Node3D" parent="TwistPivot"]
 
-[node name="Camera Bobbing" type="Node3D" parent="TwistPivot/PitchPivot"]
+[node name="CameraBobbing" type="Node3D" parent="TwistPivot/PitchPivot"]
 script = ExtResource("2_lpiwy")
 
-[node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot/Camera Bobbing"]
+[node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot/CameraBobbing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 current = true
 
-[node name="RayCast3D" type="RayCast3D" parent="TwistPivot/PitchPivot/Camera Bobbing/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="TwistPivot/PitchPivot/CameraBobbing/Camera3D"]
 target_position = Vector3(0, 0, -3.5)
 script = ExtResource("3_d4n4i")
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://rob7iqq7nifs"]
 
-[ext_resource type="Script" path="res://Scripts/door.gd" id="1_8l7dl"]
+[ext_resource type="Script" path="res://FPS/Scripts/door.gd" id="1_8l7dl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_japry"]
 size = Vector3(2, 3, 0.5)

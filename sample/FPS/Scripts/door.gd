@@ -1,4 +1,4 @@
-extends "res://Scripts/interactable.gd"
+extends "res://FPS/Scripts/interactable.gd"
 
 @export_category("INTERACTION UI")
 @export var prompt_message = ""

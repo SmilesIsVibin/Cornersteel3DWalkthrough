@@ -14,6 +14,6 @@ func search_object():
 		var collider = get_collider()
 		if collider is Interactable:
 			prompt_message.text = collider.prompt_message + "\n[" + "E" + "]"
-			if Input.is_action_just_pressed("Interact_key"):
+			if Input.is_action_just_pressed("interact_key"):
 				collider.interact(owner) # Call the interat function
 			
