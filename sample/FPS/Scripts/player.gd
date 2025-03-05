@@ -29,7 +29,7 @@ var current_speed : float = 0.0 # tracks the current speed of the player
 @onready var twist_pivot := $TwistPivot
 @onready var pitch_pivot := $TwistPivot/PitchPivot
 @onready var collision_shape := $CollisionShape3D
-@onready var camera3d := $"TwistPivot/PitchPivot/Camera Bobbing/Camera3D"
+@onready var camera3d := $"TwistPivot/PitchPivot/CameraBobbing/Camera3D"
 
 func _ready() -> void:
 	hide_cursor() # hide coruse from the start
