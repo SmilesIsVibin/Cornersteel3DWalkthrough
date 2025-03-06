@@ -2,8 +2,8 @@ extends Node3D
 
 @export_category("BOBBING SETTING")
 @export var bobbing_speed : float = 10   # Speed of the bobbing
-@export var bobbing_amount : float = 0.02  # Vertical movement amount
-@export var horizontal_offset : float = 0.005 # Horizontal movement amount
+@export var bobbing_amount : float = 0.1  # Vertical movement amount
+@export var horizontal_offset : float = 0.05 # Horizontal movement amount
 
 # Refenrence to the player node
 @onready var player : CharacterBody3D = get_parent().get_parent().get_parent()
@@ -20,21 +20,19 @@ func _process(delta):
 	
 func apply_bobbing(delta):
 	if player.is_moving():
-		# Relative scaling factor (1 when walking, >1 when sprinting)
-		var speed_factor =  player.current_speed / player.move_speed
-		
-		 # Increase bobbing speed when sprinting
+		# Make the speed factor ralative to player's current movement speed
+		var speed_factor = player.current_speed / player.move_speed
+
+		# Increase bobbing speed based on movement speed
 		timer += delta * bobbing_speed * speed_factor
 
-		# Parabolic movement for the vertical bobbing
-		var vertical_bob = sin(timer) * bobbing_amount
-		
-		# Simple horizontal offset
-		var horizontal_bob = sin(timer * 0.5) * horizontal_offset  # slower to smooth the horizontal motion
-		
-		# Apply the bobbing to the camera's position
-		position.y += vertical_bob
-		position.x += horizontal_bob
-		return
-	
-	position = position.lerp(original_position, 5 * delta)
+		# Scale bobbing intensity based on speed
+		var vertical_bob = sin(timer) * bobbing_amount * speed_factor
+		var horizontal_bob = sin(timer * 0.5) * horizontal_offset * speed_factor  # Keep horizontal motion smoother
+
+		# Apply bobbing effect
+		position.y = original_position.y + vertical_bob
+		position.x = original_position.x + horizontal_bob
+	else:
+		# Smoothly return to the original position when stopping
+		position = position.lerp(original_position, 5 * delta)

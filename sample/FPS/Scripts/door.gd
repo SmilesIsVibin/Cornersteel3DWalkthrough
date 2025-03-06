@@ -7,13 +7,14 @@ var is_door_close := true # flag to check if the door is open or not
 @onready var animation_player = $AnimationPlayer # animation player node reference
 
 func _on_interacted(body: Variant) -> void:
-	# Only toggle the door if theres no animation playing
+	# Only toggle the door state if theres no animation playing
 	if not animation_player.is_playing():
 		toggle_door()
 		
-func toggle_door():
+func toggle_door(): # Function use to player door open / close animation
 	if is_door_close:
 		animation_player.play("Door_Open")
+		
 	else:
 		animation_player.play("Door_Close")
 		

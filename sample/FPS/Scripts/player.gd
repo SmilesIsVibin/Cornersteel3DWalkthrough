@@ -5,10 +5,15 @@ extends CharacterBody3D
 @export var jump_height : float = 4.5 # max height the character can jump
 @export var gravity : float = 30.0 # self explanatory
 @export var sprint_speed : float = 8.0 # how fast the sprinting is
+var current_speed : float = 0.0 # tracks the current speed of the player
 
 @export_category("CAMERA SETTINGS")
 @export var sensitivity : float = 0.001 # how fast the camera rotation will be
 @export var max_look_limit : float = 80.0 # max limit the character can look up and dowm
+
+@export_category("CROUCHING SETTINGS")
+@export var crouch_speed: float = 3.0 # how fast the crouching is
+var is_crouching : bool = false # Tracks the current crouch state
 
 @export_category("SMOOTHING EFFECT")
 @export var smoothing_speed : float = 10.0 # The speed of smoothing
@@ -23,34 +28,44 @@ var current_delta := Vector2.ZERO # Holds the current smoothed mouse input
 var mouse_delta := Vector2.ZERO # stores the current mouse motion
 var move_vector := Vector3.ZERO # stores the movement direction
 
-var current_speed : float = 0.0 # tracks the current speed of the player
-
-# node reference
-@onready var twist_pivot := $TwistPivot
-@onready var pitch_pivot := $TwistPivot/PitchPivot
-@onready var collision_shape := $CollisionShape3D
-@onready var camera3d := $"TwistPivot/PitchPivot/CameraBobbing/Camera3D"
+@onready var twist_pivot := $TwistPivot # Reference to the twist pivot node
+@onready var pitch_pivot := $TwistPivot/PitchPivot # Reference to the pitchpivot node
+@onready var collision_shape := $CollisionShape3D # Reference to the collision shaoe 3d
+@onready var camera3d := $"TwistPivot/PitchPivot/CameraBobbing/Camera3D" # Reference to the camera
+@onready var animation_player := $AnimationPlayer # Reference the to animation player
+@onready var shape_cast3d := $ShapeCast3D # Reference to the shape cast 3d
+@onready var player_body : CharacterBody3D = self # Reference to the character body 3d
 
 func _ready() -> void:
-	hide_cursor() # hide coruse from the start
+	 # hide coruse from the start
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Make the shape cast ignore the player
+	shape_cast3d.add_exception(player_body)
 
 func _process(delta: float) -> void:
-	handle_rotation(delta)
+	  # Exit the game
+	if Input.is_action_pressed("exit_key"):
+		get_tree().quit()
+		
 	toggle_noclip()
-	exit_game()
 	
 func _physics_process(delta: float) -> void:
 	handle_noclip(delta)
 	handle_movement(delta)
+	handle_rotation(delta)
 	handle_jumping(delta)
+	handle_crouch()
 	move_and_slide()
 	
+
+	# ----------------------PLAYER LOCOMOTION FUNCTIONS ---------------------
 func handle_movement(delta):
 	# only apply this movement when noclip is disable
-	if is_noclip: return
+	if is_noclip: return	
 	
-	# adjust the current speed based on player input
-	current_speed = sprint_speed if Input.is_action_pressed("sprint_key") else move_speed
+	# Get the current speed of the player between (walking, sprinting, crouching)
+	current_speed = get_current_speed()
 	
 	# get the movement input and smooth it out
 	var move_input = get_movement_input()
@@ -89,7 +104,8 @@ func handle_jumping(delta):
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("jump_key") and is_on_floor():
-		velocity.y = jump_height
+		if !is_crouching:
+			velocity.y = jump_height
 		
 func handle_noclip(delta):
 	#Only applythis movement when noclip is anable
@@ -106,7 +122,7 @@ func handle_noclip(delta):
 	
 func toggle_noclip():
 	# Toggle nocli[ on and off using N key
-	if Input.is_action_just_pressed("noclip_key"):
+	if Input.is_action_just_pressed("noclip_key") && !is_crouching:
 		is_noclip = !is_noclip
 		if is_noclip:
 			collision_shape.disabled = true
@@ -116,7 +132,19 @@ func toggle_noclip():
 		else:
 			collision_shape.disabled = false
 			
-# input section
+func handle_crouch():
+	# Only allow crouching when not noclipping
+	if Input.is_action_just_pressed("crouch_key") and !is_noclip:
+		
+	# Prevent clipping to the wall when standing by using a ray check above
+	# the player's head
+		if is_crouching and not shape_cast3d.is_colliding():
+			animation_player.play("crouch", -1, -crouch_speed, true)
+		elif not is_crouching:
+			animation_player.play("crouch", -1, crouch_speed)
+		
+
+	# ----------------------PLAYER INPUT FUNCTIONS ---------------------
 func get_movement_input() -> Vector3:
 	var move_input := Vector3.ZERO
 	move_input.x = Input.get_axis("move_left", "move_right")
@@ -129,22 +157,30 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			mouse_delta += -event.relative * sensitivity
-
+			
 	# Combine right stick input
 	var look_input = Vector2(
 		Input.get_axis("look_left", "look_right"),
 		Input.get_axis("look_down", "look_up")
 	)
-
 	# Apply sensitivity and add to mouse_delta
 	mouse_delta += look_input * sensitivity
 	
+
+	# ---------------------- UTILITY FUNCTIONS ---------------------
+func get_current_speed() -> float:
+	if is_crouching:
+		return crouch_speed  # Prioritize crouching over sprinting
+		
+	elif Input.is_action_pressed("sprint_key"):
+		return sprint_speed  # Sprint only if not crouching
+		
+	else:
+		return move_speed  # Default walking speed
+		
 func is_moving() -> bool:
 	return velocity.length() > 0.1 # adjust as needed
 	
-func hide_cursor():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-func exit_game():
-	if Input.is_action_pressed("exit_key"):
-		get_tree().quit()  # Exit the game
+func _on_animation_player_animation_started(anim_name: StringName) -> void:
+	if anim_name == "crouch":
+		is_crouching = !is_crouching

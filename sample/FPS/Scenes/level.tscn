@@ -55,7 +55,12 @@ shape = SubResource("ConcavePolygonShape3D_7g76u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.855783, 0)
 
 [node name="Door Holder" parent="." groups=["Interactable"] instance=ExtResource("2_oeb7k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.47544, -0.144217, -5.78616)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97544, -0.144217, -5.78616)
 
 [node name="Switch" parent="." instance=ExtResource("3_v4ltf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -6)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -5.5)
+use_collision = true
+size = Vector3(5, 1, 3)
