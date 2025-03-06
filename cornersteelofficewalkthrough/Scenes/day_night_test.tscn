@@ -94,6 +94,8 @@ light_color = Color(0.466309, 0.354231, 0.203217, 1)
 light_energy = 0.75
 light_bake_mode = 1
 shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 300.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DirectionalLight3D"]
 libraries = {

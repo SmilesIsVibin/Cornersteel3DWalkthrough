@@ -1,9 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://dq7pqsxq8ro4v"]
 
-[ext_resource type="Texture2D" uid="uid://d4hqhleoel3k1" path="res://Blueprint/Another_blueprint_upscale.png" id="1_4lpkh"]
 [ext_resource type="PackedScene" uid="uid://1mp12gpjya1v" path="res://Player Related Objects/characterbody3d.tscn" id="2_7rqyg"]
 [ext_resource type="ArrayOccluder3D" uid="uid://c5wdsk80d4wlw" path="res://Scenes/MainMap.occ" id="8_14c6a"]
-[ext_resource type="VoxelGIData" uid="uid://c5ljow88f4jjx" path="res://Scenes/MainMap.VoxelGI_data.res" id="8_dtdtw"]
 [ext_resource type="PackedScene" uid="uid://fc788pex4qwc" path="res://Scenes/day_night_test.tscn" id="8_v2ie4"]
 [ext_resource type="LightmapGIData" uid="uid://8mwnawenqinh" path="res://Scenes/MainMap.lmbake" id="9_l8a21"]
 [ext_resource type="Script" uid="uid://jrbityjvdlik" path="res://Scenes/canvas_layer.gd" id="9_nskn7"]
@@ -15,9 +13,11 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_u6wsw"]
 size = Vector2(300, 250)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l8a21"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg5pm"]
 albedo_color = Color(0.521141, 0.52114, 0.521141, 1)
-albedo_texture = ExtResource("1_4lpkh")
+albedo_texture = SubResource("CompressedTexture2D_l8a21")
 
 [sub_resource type="Theme" id="Theme_q6a5g"]
 
@@ -35,7 +35,6 @@ night_sky = SubResource("GradientTexture2D_ftth4")
 [sub_resource type="Sky" id="Sky_rlahn"]
 resource_local_to_scene = true
 sky_material = SubResource("PhysicalSkyMaterial_qp6sq")
-radiance_size = 4
 
 [sub_resource type="Environment" id="Environment_dh4cs"]
 background_mode = 2
@@ -43,7 +42,7 @@ background_color = Color(1, 1, 1, 1)
 sky = SubResource("Sky_rlahn")
 ambient_light_color = Color(0.647395, 0.647395, 0.647395, 1)
 ambient_light_sky_contribution = 0.75
-tonemap_mode = 3
+reflected_light_source = 2
 tonemap_exposure = 0.75
 ssao_radius = 2.0
 ssao_intensity = 3.5
@@ -60,7 +59,12 @@ fog_density = 0.0075
 fog_sky_affect = 0.25
 volumetric_fog_albedo = Color(0.679255, 0.721689, 0.686866, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_ch5ch"]
+
 [node name="MainMap" type="Node3D"]
+
+[node name="CB3D_Player" parent="." instance=ExtResource("2_7rqyg")]
+transform = Transform3D(0.99352, 0, -0.113654, 0, 1, 0, 0.113654, 0, 0.99352, 179.464, -0.02003, 40.0995)
 
 [node name="OfficeOld" type="Node3D" parent="."]
 
@@ -70,9 +74,6 @@ visible = false
 mesh = SubResource("PlaneMesh_u6wsw")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_fg5pm")
-
-[node name="CB3D_Player" parent="OfficeOld" instance=ExtResource("2_7rqyg")]
-transform = Transform3D(1.7045, 0, -0.186346, 0, 2.06475, 0, 0.194986, 0, 1.62896, 179.464, -0.02003, 40.0995)
 
 [node name="BuildLabel" type="Control" parent="OfficeOld"]
 layout_mode = 3
@@ -238,9 +239,6 @@ text = "Cornersteel IT Lounge"
 
 [node name="CornersteelOfficeEnvironment_UpScaled" parent="." instance=ExtResource("23_53ips")]
 
-[node name="OfficeRoof" parent="CornersteelOfficeEnvironment_UpScaled" index="285"]
-visible = false
-
 [node name="DayNightTest" parent="." instance=ExtResource("8_v2ie4")]
 transform = Transform3D(0.828823, 0.167727, -0.533779, 0, 0.95401, 0.299774, 0.559511, -0.248459, 0.790706, 0, 11.1817, 0)
 
@@ -262,7 +260,14 @@ directional_shadow_max_distance = 300.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dh4cs")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7943, 8.31818, -29.2985)
+occluder = ExtResource("8_14c6a")
+bake_simplification_distance = 1.0
+
+[node name="OmniLights" type="Node" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.2186, 10, -9.86859)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -279,7 +284,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D11" type="OmniLight3D" parent="."]
+[node name="OmniLight3D11" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.4217, 10, -9.30411)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -296,7 +301,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D12" type="OmniLight3D" parent="."]
+[node name="OmniLight3D12" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.8572, 10, -77.0417)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -313,7 +318,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D13" type="OmniLight3D" parent="."]
+[node name="OmniLight3D13" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.9607, 10, -79.2996)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -330,7 +335,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D14" type="OmniLight3D" parent="."]
+[node name="OmniLight3D14" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.343, 10, -82.6865)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -347,7 +352,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D15" type="OmniLight3D" parent="."]
+[node name="OmniLight3D15" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.0367, 10, -130.75)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -364,7 +369,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+[node name="OmniLight3D2" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -87.5681, 10, 66.356)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -381,7 +386,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+[node name="OmniLight3D3" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100.432, 10, 3.89933)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -398,7 +403,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+[node name="OmniLight3D4" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3068, 10, 84.3568)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -415,7 +420,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+[node name="OmniLight3D5" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2801, 10, 79.0481)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -432,7 +437,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+[node name="OmniLight3D6" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.2903, 10, 62.6504)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -449,7 +454,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D7" type="OmniLight3D" parent="."]
+[node name="OmniLight3D7" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 113.268, 10, -11.5363)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -466,7 +471,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D8" type="OmniLight3D" parent="."]
+[node name="OmniLight3D8" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 187.314, 10, -62.0076)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -483,7 +488,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D9" type="OmniLight3D" parent="."]
+[node name="OmniLight3D9" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.38, 10, 16.919)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -500,7 +505,7 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OmniLight3D10" type="OmniLight3D" parent="."]
+[node name="OmniLight3D10" type="OmniLight3D" parent="OmniLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 156.01, 10, -63.2372)
 light_color = Color(0.820365, 0.820366, 0.820366, 1)
 light_energy = 1.676
@@ -517,22 +522,16 @@ distance_fade_length = 30.0
 omni_range = 100.0
 omni_attenuation = 0.75
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7943, 8.31818, -29.2985)
-occluder = ExtResource("8_14c6a")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(500, 0, 0, 0, 1, 0, 0, 0, 500, 0, 20.6471, 0)
+cast_shadow = 3
+mesh = SubResource("BoxMesh_ch5ch")
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7943, 8.31818, -29.2985)
-visible = false
-shadowmask_mode = 1
+quality = 0
 interior = true
 denoiser_strength = 0.5
 light_data = ExtResource("9_l8a21")
 
-[node name="VoxelGI" type="VoxelGI" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7943, 8.31818, -29.2985)
-subdiv = 2
-size = Vector3(422.173, 41.0612, 352.521)
-data = ExtResource("8_dtdtw")
-
-[editable path="CornersteelOfficeEnvironment_UpScaled"]
+[editable path="DayNightTest"]
