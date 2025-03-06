@@ -163,7 +163,11 @@ offset_right = 120.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 text = "Door e"
+uppercase = true
 
 [node name="ControlText" type="Label" parent="PlayerInterface"]
 layout_mode = 1
@@ -173,6 +177,8 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 105.0
 grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 text = "[TAB] / [SELECT] TO SHOW CONTROLS"
 
 [node name="ControlGuidePanel" type="Panel" parent="PlayerInterface"]
