@@ -9,9 +9,11 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7kcx2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nk75x"]
+resource_local_to_scene = true
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_gjo2e")
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -85,7 +87,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 105.0
 grow_vertical = 0
-text = "[TAB] / [BACK] TO SHOW CONTROLS"
+text = "[TAB] / [SELECT] TO SHOW CONTROLS"
 
 [node name="ControlGuidePanel" type="Panel" parent="PlayerInterface"]
 visible = false
@@ -101,7 +103,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control Guide" type="Label" parent="PlayerInterface/ControlGuidePanel"]
+[node name="ControlGuide" type="Label" parent="PlayerInterface/ControlGuidePanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,7 +134,7 @@ grow_vertical = 2
 theme_override_constants/h_separation = 120
 columns = 3
 
-[node name="Action Text" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
+[node name="ActionText" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "ACTIONS
@@ -146,10 +148,10 @@ NOCLIP
 EXIT"
 horizontal_alignment = 1
 
-[node name="Pc Control" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
+[node name="KeyboardControls" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "PC
+text = "KEYBOARD
 
 WASD
 MOUSE
@@ -160,16 +162,16 @@ N
 ESC"
 horizontal_alignment = 1
 
-[node name="Controller Control" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
+[node name="ControllerControls" type="Label" parent="PlayerInterface/ControlGuidePanel/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CONTROLLER
 
 LEFT STICK
 RIGHT STICK
-A
-WASD + LEFT STICK CLICK
-X
-Y
+CROSS
+LEFT STICK + LEFT STICK CLICK
+SQUARE
+TRIANGLE
 START"
 horizontal_alignment = 1
