@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://btfviyro4agja"
-path="res://.godot/imported/Square Game.otf-af58066380de17f68a7876a95f046e3f.fontdata"
+path="res://.godot/imported/Square Game.otf-8cfc3df131c782d3e624016d99903243.fontdata"
 
 [deps]
 
-source_file="res://FONTS/Square Game.otf"
-dest_files=["res://.godot/imported/Square Game.otf-af58066380de17f68a7876a95f046e3f.fontdata"]
+source_file="res://ForImport/FONTS/Square Game.otf"
+dest_files=["res://.godot/imported/Square Game.otf-8cfc3df131c782d3e624016d99903243.fontdata"]
 
 [params]
 

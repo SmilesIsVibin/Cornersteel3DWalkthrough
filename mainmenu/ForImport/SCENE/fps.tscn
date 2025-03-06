@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cig6jdopat22v"]
 
-[ext_resource type="Script" path="res://ForImport/Script/fps.gd" id="1_x5yl3"]
+[ext_resource type="Script" path="res://ForImport/Script/Settings_FPS.gd" id="1_x5yl3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqcul"]
 bg_color = Color(0, 0, 0, 0.422)

@@ -1,26 +1,39 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf1ogejo0mbyw"]
+[gd_scene load_steps=10 format=3 uid="uid://bf1ogejo0mbyw"]
 
 [ext_resource type="PackedScene" uid="uid://8e4cse562kxx" path="res://ForImport/SCENE/window_mode.tscn" id="2_c4kik"]
 [ext_resource type="PackedScene" uid="uid://d0y00m2x664om" path="res://ForImport/SCENE/MasterSlider.tscn" id="2_vnn7b"]
 [ext_resource type="PackedScene" uid="uid://d4dxdhs8spohl" path="res://ForImport/SCENE/reso_.tscn" id="3_0a7lx"]
 [ext_resource type="PackedScene" uid="uid://dy3th0rod80kb" path="res://ForImport/SCENE/fps_buttons.tscn" id="4_eavex"]
 [ext_resource type="PackedScene" uid="uid://bj4odese28ifh" path="res://ForImport/SCENE/VSYNC.tscn" id="6_ov011"]
+[ext_resource type="PackedScene" uid="uid://qnue1ong4d27" path="res://ForImport/SCENE/MouseSens.tscn" id="7_n2mtq"]
 [ext_resource type="PackedScene" uid="uid://c2xdloidy2a48" path="res://ForImport/SCENE/Shadwo.tscn" id="7_p6hi2"]
+[ext_resource type="Script" path="res://ForImport/Script/Settings-Shadow.gd" id="7_vpk63"]
 
 [sub_resource type="GDScript" id="GDScript_jbni2"]
 script/source = "extends Control
 
 @onready var MainMenu = get_node(\"/root/MainMenu\")  # Adjust the path based on your scene hierarchy
 var FPSUI: bool = false
+@export var light2: DirectionalLight3D
+var light1: bool = false
 
 # Function to modify FPSUI from FPSToggle
 func set_fps_ui(value: bool) -> void:
 	FPSUI = value
 	print(\"FPSUI set to:\", FPSUI)
 
+func set_light_off(value: bool) -> void:
+	light1 = value
+	print(\"light1 set to:\", light1)
+
 func _process(_delta: float) -> void:
 	UI_Set_MainMenu()
-
+	
+func _light_off() -> void:
+	if light1:
+		light2.shadow_enabled = true
+	else:
+		light2.shadow_enabled = false
 # Function to interact with MainMenu
 func UI_Set_MainMenu() -> void:
 	if MainMenu:
@@ -29,7 +42,7 @@ func UI_Set_MainMenu() -> void:
 		print(\"Error: MainMenu node not found!\")
 "
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" node_paths=PackedStringArray("light2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +50,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_jbni2")
+light2 = NodePath("DirectionalLight3D")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -122,9 +136,9 @@ layout_mode = 2
 [node name="Vsync" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("6_ov011")]
 layout_mode = 2
 
-[node name="Shadow" parent="TabContainer/Video/MarginContainer/VBoxContainer" node_paths=PackedStringArray("light") instance=ExtResource("7_p6hi2")]
+[node name="Shadow" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("7_p6hi2")]
 layout_mode = 2
-light = NodePath("../../../../../DirectionalLight3D")
+script = ExtResource("7_vpk63")
 
 [node name="Controls" type="TabBar" parent="TabContainer"]
 visible = false
@@ -143,27 +157,7 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer"]
+[node name="KeyBInds" parent="TabContainer/Controls/MarginContainer" instance=ExtResource("7_n2mtq")]
 layout_mode = 2
-theme_override_constants/separation = 64
-alignment = 1
-
-[node name="Label" type="Label" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Sensitivity"
-
-[node name="HSlider2" type="HSlider" parent="TabContainer/Controls/MarginContainer/VBoxContainer/Label"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -219.5
-offset_top = -10.5
-offset_right = 219.5
-offset_bottom = 10.5
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

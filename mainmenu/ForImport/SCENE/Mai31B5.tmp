@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://ForImport/Script/main_menu.gd" id="1_3skkx"]
 [ext_resource type="Texture2D" uid="uid://dqutbpr5vacsh" path="res://ForImport/photo-1534237710431-e2fc698436d0.jpg" id="2_rwqnk"]
-[ext_resource type="FontFile" uid="uid://cp0younystipd" path="res://ForImport/FONTS/Radium Corp.ttf" id="3_5a5tk"]
-[ext_resource type="FontFile" uid="uid://btfviyro4agja" path="res://ForImport/FONTS/Square Game.otf" id="4_6rdb1"]
+[ext_resource type="FontFile" uid="uid://cp0younystipd" path="res://FONTS/Radium Corp.ttf" id="3_5a5tk"]
+[ext_resource type="FontFile" uid="uid://btfviyro4agja" path="res://FONTS/Square Game.otf" id="4_6rdb1"]
 [ext_resource type="PackedScene" uid="uid://w0i1g6wc80jo" path="res://ForImport/SCENE/Main_settings.tscn" id="5_pgwql"]
 [ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://ForImport/SCENE/fps.tscn" id="6_0dqxn"]
 [ext_resource type="Script" path="res://ForImport/Script/buttonSFX.gd" id="6_kbwsw"]

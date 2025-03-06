@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _on_Start_pressed() -> void:
 	await get_tree().create_timer(0.3).timeout
-	get_tree().change_scene_to_file("res://Test.tscn")  #"res://Test.tscn"#"res://ForImport/SCENE/Level1.tscn"
+	get_tree().change_scene_to_file("res://ForImport/SCENE/Level1.tscn")  #"res://Test.tscn"#"res://ForImport/SCENE/Level1.tscn"
 
 func _process(_delta: float) -> void:
 	_process_UI()

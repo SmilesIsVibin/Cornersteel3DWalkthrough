@@ -5,7 +5,8 @@ extends Control
 
 var FPSOn: bool = true
 
-@export var light = DirectionalLight3D
+@onready var light2 = $"../../../../.."
+#@export var light = DirectionalLight3D
 var save_path: String = "user://settings.json"
 #signal FPS_OFF
 
@@ -22,10 +23,10 @@ func _on_button_pressed() -> void:
 	update_button_text()
 	save_settings()
 	if FPSOn:
-		light.shadow_enabled = true
+		light2.set_light_off(FPSOn)
 		print("ShadowON")
 	else:
-		light.shadow_enabled = false
+		light2.set_light_off(FPSOn)
 		print("ShadowOff")
 
 func save_settings() -> void:
@@ -63,8 +64,8 @@ func load_settings() -> void:
 		FPSOn = parsed.get("Shadow", false)
 		
 	if FPSOn:
-		light.shadow_enabled = true
+		light2.set_light_off(FPSOn)
 		print("ShadowON")
 	else:
-		light.shadow_enabled = false
+		light2.set_light_off(FPSOn)
 		print("ShadowOff")

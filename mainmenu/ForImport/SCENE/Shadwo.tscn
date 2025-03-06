@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2xdloidy2a48"]
 
-[ext_resource type="Script" path="res://ForImport/Script/shadwo.gd" id="1_nkq7l"]
+[ext_resource type="Script" path="res://ForImport/Script/Pause-Shadow.gd" id="1_nkq7l"]
 [ext_resource type="Script" path="res://ForImport/Script/buttonSFX.gd" id="2_0m6tl"]
 
 [node name="Shadow" type="Control" node_paths=PackedStringArray("Bt_txt")]

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cp0younystipd"
-path="res://.godot/imported/Radium Corp.ttf-3db9281f562dc04e43d97c09d92a1907.fontdata"
+path="res://.godot/imported/Radium Corp.ttf-2916f2f00cade27b3f8d6a4a3a165163.fontdata"
 
 [deps]
 
-source_file="res://FONTS/Radium Corp.ttf"
-dest_files=["res://.godot/imported/Radium Corp.ttf-3db9281f562dc04e43d97c09d92a1907.fontdata"]
+source_file="res://ForImport/FONTS/Radium Corp.ttf"
+dest_files=["res://.godot/imported/Radium Corp.ttf-2916f2f00cade27b3f8d6a4a3a165163.fontdata"]
 
 [params]
 

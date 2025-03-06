@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bromkf6jxo665"]
 
-[ext_resource type="Script" path="res://ForImport/Script/paus_fps.gd" id="1_ai6pr"]
+[ext_resource type="Script" path="res://ForImport/Script/Pause_FPS.gd" id="1_ai6pr"]
 [ext_resource type="Script" path="res://ForImport/Script/buttonSFX.gd" id="2_22b2n"]
 
 [node name="VSync" type="Control"]
