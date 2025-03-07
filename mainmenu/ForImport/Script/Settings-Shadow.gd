@@ -1,33 +1,30 @@
 extends Control
 
 
-@export var Bt_txt : Button
+@export var Bt_txt : Button # calliing the button needed in the scene
+@onready var light2 = $"../../../../.." #calling the parent node 
+var save_path: String = "user://settings.json" #path file for saving 
+var FPSOn: bool = true #handles the turn off or on of the shadow
 
-var FPSOn: bool = true
-
-@onready var light2 = $"../../../../.."
-#@export var light = DirectionalLight3D
-var save_path: String = "user://settings.json"
-#signal FPS_OFF
 
 func _ready() -> void:
-	load_settings()
-	update_button_text()
+	load_settings() #load shadow
+	update_button_text() #update the text based on off or on
 
 func update_button_text() -> void:
-	Bt_txt.text = "ON" if FPSOn else "OFF"
+	Bt_txt.text = "ON" if FPSOn else "OFF"  #update the text based on off or on
 	
 
 func _on_button_pressed() -> void:
 	FPSOn = !FPSOn  # Toggle FPS state
-	update_button_text()
-	save_settings()
+	update_button_text()  #update the text based on off or on
+	save_settings() #saving data about shadow
+	
+	#handles turning on or off of shadow
 	if FPSOn:
 		light2.set_light_off(FPSOn)
-		print("ShadowON")
 	else:
 		light2.set_light_off(FPSOn)
-		print("ShadowOff")
 
 func save_settings() -> void:
 	var settings_data: Dictionary = {}

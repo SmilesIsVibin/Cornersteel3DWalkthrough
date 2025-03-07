@@ -20,16 +20,14 @@ func _light_off() -> void:
 # Sets the light state and prints its current value.
 func set_light_off(value: bool) -> void:
 	light1 = value
-	print("light1 set to:", light1)
 
 # Updates the fps_ui variable and prints its new value.
 func set_fps_ui(value: bool) -> void:
 	fps_ui = value
-	print("fps_ui set to:", fps_ui)
 
 # Updates the visibility of the UI element based on fps_ui.
 func _process_me() -> void:
 	if fps_ui:
-		fps_rect.visible = true  # Fixed typo here
+		fps_rect.visible = true  
 	else:
 		fps_rect.visible = false

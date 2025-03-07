@@ -1,12 +1,13 @@
 extends Control
 
-@onready var button_scene = preload("res://ForImport/SCENE/action.tscn")
-@onready var action_list = $MarginContainer/VBoxContainer/ScrollContainer/Action
+@onready var button_scene = preload("res://ForImport/SCENE/action.tscn")  #Preloading the scene action to instantiate it
+@onready var action_list = $MarginContainer/VBoxContainer/ScrollContainer/Action # getting the container where to put the action list of key bind
 
 var is_remapping = false
 var action_to_remap = null
 var remapping_button = null
 
+# Limits what action to show in the container
 var input_actions = {
 	"move_forward": "Forward",
 	"move_backward": "Backwards",
@@ -80,6 +81,7 @@ func _update_action_list(button, event):
 	button.find_child("Label2").text = event.as_text().trim_suffix(" (Physical)")
 
 func _on_button_pressed() -> void:
+	#this function reset the keybinds to the default Input map and save it
 	InputMap.load_from_project_settings()
 	save_key_bindings()
 	_create_action_list()

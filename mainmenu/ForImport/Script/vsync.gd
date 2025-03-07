@@ -1,22 +1,23 @@
 extends Control
 
-@export var Bt_txt: Button
+@export var Bt_txt: Button #calling the buttons in the scene
+var FPSOn: bool = false # setting up flag for turning on or off the Vsync
+var save_path: String = "user://settings.json" #path file for saving
 
-var FPSOn: bool = false
-var save_path: String = "user://settings.json"
 
 func _ready() -> void:
-	load_settings()
-	update_button_text()
+	load_settings() #load the data saved
+	update_button_text() #update the text based on off or on
 
 func update_button_text() -> void:
-	Bt_txt.text = "ON" if FPSOn else "OFF"
+	Bt_txt.text = "ON" if FPSOn else "OFF" #update the text based on off or on
 
 func _on_button_pressed() -> void:
 	FPSOn = !FPSOn  # Toggle FPS state
-	update_button_text()
-	save_settings()
+	update_button_text() #update the text based on off or on
+	save_settings() #save the data about vsync
 	
+	#handles turning on or off the vsync
 	if FPSOn:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 		print("FPS - 60")
@@ -24,6 +25,8 @@ func _on_button_pressed() -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		print("FPS + 60")
 
+
+#save function
 func save_settings() -> void:
 	var settings: Dictionary = {}
 	
@@ -46,6 +49,7 @@ func save_settings() -> void:
 	file.store_string(JSON.stringify(settings, "\t"))  # Pretty format JSON
 	file.close()
 
+#load function
 func load_settings() -> void:
 	if not FileAccess.file_exists(save_path):
 		return  # Skip if the file doesn't exist

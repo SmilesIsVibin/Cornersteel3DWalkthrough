@@ -1,26 +1,28 @@
 extends Control
 
-@onready var settings_node = $"../../../../.."  # Adjust this based on your actual scene structure
-@export var Fps: ColorRect
-@onready var Bt_txt = $HBoxContainer/Button as Button
-var save_path: String = "user://settings.json"
+@onready var settings_node = $"../../../../.."  #calling the parent node
+@export var Fps: ColorRect #calling the FPS UI IN the Scene
+@onready var Bt_txt = $HBoxContainer/Button as Button # calling the button in the scene
+var save_path: String = "user://settings.json" #path file for saving
 
-var FPSOn: bool = false
+var FPSOn: bool = false #flag for turning on and off the fps UI
 
 func _ready() -> void:
-	load_settings()
-	update_button_text()
+	load_settings() #loading the saved data
+	update_button_text() #update the text base to the saved data 
 	settings_node.set_fps_ui(FPSOn)  # Apply FPS UI setting on load
 
 func update_button_text() -> void:
-	Bt_txt.text = "ON" if FPSOn else "OFF"
+	Bt_txt.text = "ON" if FPSOn else "OFF"  #update the text based if its on or off
 
 func _on_button_pressed() -> void:
 	FPSOn = !FPSOn  # Toggle FPS state
-	save_settings()
-	update_button_text()
+	save_settings() #save settings
+	update_button_text() #update the text based if its on or off
 	settings_node.set_fps_ui(FPSOn)  # Apply the new setting
 
+
+#save function
 func save_settings() -> void:
 	var settings_data: Dictionary = {}
 	
@@ -43,6 +45,8 @@ func save_settings() -> void:
 	file.store_string(JSON.stringify(settings_data, "\t"))  # Pretty format JSON
 	file.close()
 
+
+#loading function
 func load_settings() -> void:
 	if not FileAccess.file_exists(save_path):
 		return  # Skip if the file doesn't exist

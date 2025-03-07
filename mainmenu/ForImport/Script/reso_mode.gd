@@ -13,8 +13,8 @@ var current_resolution: String = "1280 x 720"  # Default resolution
 
 func _ready() -> void:
 	load_resolution()  # Load saved resolution
-	add_reso()
-	optionButton.item_selected.connect(on_reso)
+	add_reso() #set up the preffered resolution
+	optionButton.item_selected.connect(on_reso) #connect the button to the on_reso function
 
 	# Set the UI selection to match the loaded resolution
 	if current_resolution in resolution_Dict:
@@ -29,6 +29,7 @@ func on_reso(index: int) -> void:
 	DisplayServer.window_set_size(resolution_Dict[current_resolution])
 	save_resolution()  # Save new resolution
 
+#saving function
 func save_resolution() -> void:
 	var settings: Dictionary = {}
 	var file = FileAccess
@@ -48,6 +49,7 @@ func save_resolution() -> void:
 	file.store_string(JSON.stringify(settings, "\t"))  # Save as formatted JSON
 	file.close()
 
+#loading function
 func load_resolution() -> void:
 	if not FileAccess.file_exists(save_path):
 		return  # Skip if no save file exists
