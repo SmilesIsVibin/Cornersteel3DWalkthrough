@@ -5,6 +5,8 @@ extends Node3D
 @export var bobbing_amount : float = 0.1  # Vertical movement amount
 @export var horizontal_offset : float = 0.05 # Horizontal movement amount
 
+@export var is_bobbing_on : bool = true # flag to check the status of bobbing
+
 # Refenrence to the player node
 @onready var player : CharacterBody3D = get_parent().get_parent().get_parent()
 
@@ -16,10 +18,13 @@ func _ready() -> void:
 	original_position = position
 	
 func _process(delta):
+	if Input.is_action_just_pressed("bobbing_key"):
+		toggle_bobbing()
+		
 	apply_bobbing(delta)
 	
 func apply_bobbing(delta):
-	if player.is_moving():
+	if player.is_moving() and is_bobbing_on:
 		# Make the speed factor ralative to player's current movement speed
 		var speed_factor = player.current_speed / player.move_speed
 
@@ -36,3 +41,11 @@ func apply_bobbing(delta):
 	else:
 		# Smoothly return to the original position when stopping
 		position = position.lerp(original_position, 5 * delta)
+		
+func toggle_bobbing():
+	is_bobbing_on = !is_bobbing_on
+		
+	if is_bobbing_on:
+		print_debug("BOBBING ON")
+	elif not is_bobbing_on:
+		print_debug("BOBBING OFF")
