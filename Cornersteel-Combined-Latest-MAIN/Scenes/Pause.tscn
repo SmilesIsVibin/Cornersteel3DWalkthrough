@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://t4f1tatiqs2d"]
+
+[ext_resource type="PackedScene" uid="uid://d0y00m2x664om" path="res://Scenes/MasterSlider.tscn" id="1_5yvjv"]
+[ext_resource type="Script" uid="uid://21sm1ct5s6td" path="res://GDScripts/Saves/PauseMenu.gd" id="1_ibwkm"]
+[ext_resource type="PackedScene" uid="uid://8e4cse562kxx" path="res://Scenes/window_mode.tscn" id="2_n1tgv"]
+[ext_resource type="PackedScene" uid="uid://d4dxdhs8spohl" path="res://Scenes/reso_.tscn" id="3_0fddj"]
+[ext_resource type="PackedScene" uid="uid://bromkf6jxo665" path="res://Scenes/PausFPS.tscn" id="5_25wjp"]
+[ext_resource type="PackedScene" uid="uid://bj4odese28ifh" path="res://Scenes/VSYNC.tscn" id="5_synjs"]
+[ext_resource type="PackedScene" uid="uid://c2xdloidy2a48" path="res://Scenes/Shadwo.tscn" id="6_h62pi"]
+[ext_resource type="PackedScene" uid="uid://qnue1ong4d27" path="res://Scenes/MouseSens.tscn" id="8_aemof"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ibwkm")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -150.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+current_tab = 2
+
+[node name="Sounds" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sounds/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="SliderMaster" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("1_5yvjv")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Music" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("1_5yvjv")]
+layout_mode = 2
+size_flags_horizontal = 4
+bus_name = "MUSIC"
+
+[node name="SFX" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("1_5yvjv")]
+layout_mode = 2
+size_flags_horizontal = 4
+bus_name = "SFX"
+
+[node name="Video" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Video/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 65
+alignment = 1
+
+[node name="WindowMode" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("2_n1tgv")]
+layout_mode = 2
+
+[node name="Reso_" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("3_0fddj")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="FPS" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("5_25wjp")]
+layout_mode = 2
+
+[node name="Vsync" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("5_synjs")]
+layout_mode = 2
+
+[node name="Shadow" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("6_h62pi")]
+layout_mode = 2
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="KeyBInds" parent="TabContainer/Controls/MarginContainer" instance=ExtResource("8_aemof")]
+layout_mode = 2

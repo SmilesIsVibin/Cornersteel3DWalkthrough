@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://qnue1ong4d27"]
+
+[ext_resource type="Script" path="res://ForImport/Script/KeyBinds.gd" id="1_0jnux"]
+[ext_resource type="PackedScene" uid="uid://doss6nk5k1lgs" path="res://ForImport/SCENE/action.tscn" id="2_fds17"]
+
+[node name="KeyBInds" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0jnux")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Action" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 70
+
+[node name="Actions" parent="MarginContainer/VBoxContainer/ScrollContainer/Action" instance=ExtResource("2_fds17")]
+layout_mode = 2
+
+[node name="Actions2" parent="MarginContainer/VBoxContainer/ScrollContainer/Action" instance=ExtResource("2_fds17")]
+layout_mode = 2
+
+[node name="Actions3" parent="MarginContainer/VBoxContainer/ScrollContainer/Action" instance=ExtResource("2_fds17")]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Reset to Default"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

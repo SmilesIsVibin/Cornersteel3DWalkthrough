@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4dxdhs8spohl"]
+
+[ext_resource type="PackedScene" uid="uid://8e4cse562kxx" path="res://ForImport/SCENE/window_mode.tscn" id="1_da4jh"]
+[ext_resource type="Script" uid="uid://c41edv2boxqdw" path="res://ForImport/Script/reso_mode.gd" id="2_mjj68"]
+
+[node name="Reso_" instance=ExtResource("1_da4jh")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_right = 0.5
+script = ExtResource("2_mjj68")
+
+[node name="Label" parent="HBoxContainer" index="0"]
+text = "Resolution"

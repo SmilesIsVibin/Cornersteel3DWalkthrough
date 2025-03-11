@@ -1,0 +1,172 @@
+[gd_scene load_steps=16 format=3 uid="uid://cydvv12dpwiyt"]
+
+[ext_resource type="Script" path="res://GDScripts/Saves/main_menu.gd" id="1_3skkx"]
+[ext_resource type="Texture2D" uid="uid://uxt62aylsgkk" path="res://Assets/Images/Backgrounds/Title-Render.png" id="2_koqhg"]
+[ext_resource type="FontFile" uid="uid://cp0younystipd" path="res://Assets/Fonts/Radium Corp.ttf" id="3_5a5tk"]
+[ext_resource type="FontFile" uid="uid://btfviyro4agja" path="res://Assets/Fonts/Square Game.otf" id="4_6rdb1"]
+[ext_resource type="PackedScene" uid="uid://w0i1g6wc80jo" path="res://Scenes/Main_settings.tscn" id="5_pgwql"]
+[ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://Scenes/fps.tscn" id="6_0dqxn"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="6_kbwsw"]
+[ext_resource type="AudioStream" uid="uid://j3j1ulibsd2t" path="res://Assets/BackgroundTracks/lofi-beat-chill-7373.mp3" id="7_s3ulq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_edg5g"]
+texture = ExtResource("2_koqhg")
+modulate_color = Color(0.853927, 0.886155, 0.849766, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_1nxbm"]
+base_font = ExtResource("3_5a5tk")
+
+[sub_resource type="FontVariation" id="FontVariation_f3c8a"]
+base_font = ExtResource("4_6rdb1")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2nfvb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3rl6"]
+bg_color = Color(0.736, 0.736, 0.736, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xx3c8"]
+bg_color = Color(0.309, 0.309, 0.309, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb7g5"]
+bg_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("UIFPS")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_3skkx")
+UIFPS = NodePath("FPS")
+
+[node name="BG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_edg5g")
+
+[node name="FPS" parent="." instance=ExtResource("6_0dqxn")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -292.0
+offset_right = 491.0
+offset_bottom = 192.0
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="TITLE" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_1nxbm")
+theme_override_font_sizes/font_size = 90
+text = "   Comfac Global"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("music_Player")]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.5
+theme_override_colors/font_hover_color = Color(0.566298, 0.566298, 0.566298, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_f3c8a")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2nfvb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g3rl6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xx3c8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bb7g5")
+text = "         Start"
+alignment = 0
+script = ExtResource("6_kbwsw")
+music_Player = NodePath("../../SFX")
+
+[node name="Button2" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("music_Player")]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.5
+theme_override_colors/font_hover_color = Color(0.566298, 0.566298, 0.566298, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_f3c8a")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2nfvb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g3rl6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xx3c8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bb7g5")
+text = "         Settings"
+alignment = 0
+script = ExtResource("6_kbwsw")
+music_Player = NodePath("../../SFX")
+
+[node name="Button3" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("music_Player")]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.5
+theme_override_colors/font_hover_color = Color(0.566298, 0.566298, 0.566298, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_f3c8a")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2nfvb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g3rl6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xx3c8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bb7g5")
+text = "         	Quit"
+alignment = 0
+script = ExtResource("6_kbwsw")
+music_Player = NodePath("../../SFX")
+
+[node name="MainSettings" parent="." instance=ExtResource("5_pgwql")]
+visible = false
+layout_mode = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_s3ulq")
+volume_db = -12.0
+autoplay = true
+bus = &"MUSIC"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
+autoplay = true
+
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button2" to="VBoxContainer/Button2" method="_on_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="VBoxContainer/Button2" method="_on_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button3" to="VBoxContainer/Button3" method="_on_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="VBoxContainer/Button3" method="_on_pressed"]
