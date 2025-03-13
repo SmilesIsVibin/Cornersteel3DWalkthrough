@@ -46,8 +46,3 @@ func apply_bobbing(delta):
 		
 func toggle_bobbing():
 	is_bobbing_on = !is_bobbing_on
-		
-	if is_bobbing_on:
-		print_debug("BOBBING ON")
-	elif not is_bobbing_on:
-		print_debug("BOBBING OFF")

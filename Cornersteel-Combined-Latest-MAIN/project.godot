@@ -25,6 +25,11 @@ window/size/mode=3
 
 project/assembly_name="Cornersteel-Office-Walkthrough-Latest"
 
+[global_group]
+
+Player=""
+AC_Units=""
+
 [input]
 
 move_forward={

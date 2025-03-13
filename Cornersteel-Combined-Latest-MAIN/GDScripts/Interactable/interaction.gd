@@ -12,9 +12,8 @@ func search_object():
 	
 	 # Check if the ray hit something
 	if is_colliding():
-		
 		# Save the object hit buy ray
-		var collider = get_collider() 
+		var collider = get_collider()
 		
 		 # Check if its in the "Interactable" group
 		if collider is Interactable:
@@ -22,4 +21,3 @@ func search_object():
 			
 			if Input.is_action_just_pressed("interact_key"):
 				collider.interact(owner) # Call the interat function
-			

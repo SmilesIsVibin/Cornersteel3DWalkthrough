@@ -97,7 +97,7 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_x8bdq"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_gjo2e")
 metadata/_edit_lock_ = true
 
@@ -122,7 +122,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 current = true
 
 [node name="RayCast3D" type="RayCast3D" parent="TwistPivot/PitchPivot/CameraBobbing/Camera3D"]
-target_position = Vector3(0, 0, -3.5)
+target_position = Vector3(0, 0, -5)
 script = ExtResource("3_d4n4i")
 
 [node name="PlayerInterface" type="Control" parent="."]
@@ -182,6 +182,16 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 3
 text = "[TAB] / [SELECT] TO SHOW CONTROLS"
+
+[node name="ScreenColor" type="ColorRect" parent="PlayerInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.470588)
 
 [node name="ControlGuidePanel" type="Panel" parent="PlayerInterface"]
 visible = false
