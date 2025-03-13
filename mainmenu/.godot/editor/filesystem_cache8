@@ -1,0 +1,49 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1741309896
+default_bus_layout.tres::AudioBusLayout::8790100721498234650::1741069357::0::1::::<><>::
+icon.svg::CompressedTexture2D::7988942168152875668::1740964361::1740964371::1::::<><>::
+Main.tscn::PackedScene::1284536875739599669::1741141962::0::1::::<><>::uid://cydvv12dpwiyt::::res://ForImport/SCENE/MainMenu.tscn<>uid://dlhrauupcihme::::res://ForImport/SCENE/Level1.tscn
+Test.tscn::PackedScene::7740276133597891509::1741165247::0::1::::<><>::uid://c2xdloidy2a48::::res://ForImport/SCENE/Shadwo.tscn
+::res://ForImport/::1741245648
+photo-1534237710431-e2fc698436d0.jpg::CompressedTexture2D::8324727328528540483::1740967062::1740990482::1::::<><>::
+::res://ForImport/BGM/::1741068606
+lofi-beat-chill-7373.mp3::AudioStreamMP3::690096121257773717::1741067514::1741068606::1::::<><>::
+::res://ForImport/FONTS/::1741245671
+Radium Corp.ttf::FontFile::5878766746413967001::1740970408::1741245671::1::::<><>::
+Square Game.otf::FontFile::3731621232282285594::1740971153::1741245671::1::::<><>::
+::res://ForImport/SCENE/::1741245722
+action.tscn::PackedScene::8180213626694737594::1741236415::0::1::::<><>::
+fps.tscn::PackedScene::5348636861815346831::1741236930::0::1::::<><>::res://ForImport/Script/Settings_FPS.gd
+fps_buttons.tscn::PackedScene::8902764338912511089::1741165246::0::1::::<><>::res://ForImport/Script/FPSToggle.gd<>res://ForImport/Script/buttonSFX.gd
+Level1.tscn::PackedScene::7946823246300725880::1741245526::0::1::::<><>::uid://cig6jdopat22v::::res://ForImport/SCENE/fps.tscn<>uid://t4f1tatiqs2d::::res://ForImport/SCENE/Pause.tscn
+MainMenu.tscn::PackedScene::6464880713955306275::1741245722::0::1::::<><>::res://ForImport/Script/main_menu.gd<>uid://dqutbpr5vacsh::::res://ForImport/photo-1534237710431-e2fc698436d0.jpg<>uid://cp0younystipd::::res://ForImport/FONTS/Radium Corp.ttf<>uid://btfviyro4agja::::res://ForImport/FONTS/Square Game.otf<>uid://w0i1g6wc80jo::::res://ForImport/SCENE/Main_settings.tscn<>uid://cig6jdopat22v::::res://ForImport/SCENE/fps.tscn<>res://ForImport/Script/buttonSFX.gd<>uid://j3j1ulibsd2t::::res://ForImport/BGM/lofi-beat-chill-7373.mp3
+Main_settings.tscn::PackedScene::1596296534504481868::1741165247::0::1::::<><>::res://ForImport/Script/main_settings.gd<>uid://btfviyro4agja::::res://FONTS/Square Game.otf<>uid://bf1ogejo0mbyw::::res://ForImport/SCENE/Settings.tscn<>res://ForImport/Script/buttonSFX.gd
+MasterSlider.tscn::PackedScene::8965091450871945956::1741165247::0::1::::<><>::res://ForImport/Script/master_slider.gd
+MouseSens.tscn::PackedScene::1151081279876432426::1741245603::0::1::::<><>::res://ForImport/Script/KeyBinds.gd<>uid://doss6nk5k1lgs::::res://ForImport/SCENE/action.tscn
+Pause.tscn::PackedScene::1393805998413975489::1741245526::0::1::::<><>::uid://d0y00m2x664om::::res://ForImport/SCENE/MasterSlider.tscn<>res://ForImport/Script/PauseMenu.gd<>uid://8e4cse562kxx::::res://ForImport/SCENE/window_mode.tscn<>uid://d4dxdhs8spohl::::res://ForImport/SCENE/reso_.tscn<>uid://bromkf6jxo665::::res://ForImport/SCENE/PausFPS.tscn<>uid://bj4odese28ifh::::res://ForImport/SCENE/VSYNC.tscn<>uid://c2xdloidy2a48::::res://ForImport/SCENE/Shadwo.tscn<>uid://qnue1ong4d27::::res://ForImport/SCENE/MouseSens.tscn
+PausFPS.tscn::PackedScene::3609279086894664312::1741236897::0::1::::<><>::res://ForImport/Script/Pause_FPS.gd<>res://ForImport/Script/buttonSFX.gd
+reso_.tscn::PackedScene::9202333895053724521::1741229255::0::1::::<><>::uid://8e4cse562kxx::::res://ForImport/SCENE/window_mode.tscn<>res://ForImport/Script/reso_mode.gd
+Settings.tscn::PackedScene::2791899700817595322::1741245525::0::1::::<><>::uid://8e4cse562kxx::::res://ForImport/SCENE/window_mode.tscn<>uid://d0y00m2x664om::::res://ForImport/SCENE/MasterSlider.tscn<>uid://d4dxdhs8spohl::::res://ForImport/SCENE/reso_.tscn<>uid://dy3th0rod80kb::::res://ForImport/SCENE/fps_buttons.tscn<>uid://bj4odese28ifh::::res://ForImport/SCENE/VSYNC.tscn<>uid://qnue1ong4d27::::res://ForImport/SCENE/MouseSens.tscn<>uid://c2xdloidy2a48::::res://ForImport/SCENE/Shadwo.tscn<>res://ForImport/Script/Settings-Shadow.gd
+Shadwo.tscn::PackedScene::6715623376522482483::1741236881::0::1::::<><>::res://ForImport/Script/Pause-Shadow.gd<>res://ForImport/Script/buttonSFX.gd
+Stats.tscn::PackedScene::2786137041857656248::1741236415::0::1::::<><>::
+VSYNC.tscn::PackedScene::3078842864702580489::1741165246::0::1::::<><>::res://ForImport/Script/vsync.gd<>res://ForImport/Script/buttonSFX.gd
+window_mode.tscn::PackedScene::2326254668454427989::1741072564::0::1::::<><>::uid://bfxvjge4avgn5::::res://ForImport/SCENE/Stats.tscn<>res://ForImport/Script/window_mode.gd<>res://ForImport/Script/buttonSFX.gd
+::res://ForImport/Script/::1741245510
+buttonSFX.gd::GDScript::-1::1741157996::0::1::::<>Button<>::
+FPSToggle.gd::GDScript::-1::1741159046::0::1::::<>Control<>::
+KeyBinds.gd::GDScript::-1::1741245510::0::1::::<>Control<>::
+main_menu.gd::GDScript::-1::1741236819::0::1::::<>Control<>::
+main_settings.gd::GDScript::-1::1741074005::0::1::::OptionMenu<>Control<>::
+master_slider.gd::GDScript::-1::1741245075::0::1::::AudioSave<>Control<>::
+Pause-Shadow.gd::GDScript::-1::1741236733::0::1::::<>Control<>::
+PauseMenu.gd::GDScript::-1::1741236359::0::1::::<>Control<>::
+Pause_FPS.gd::GDScript::-1::1741159073::0::1::::<>Control<>::
+reso_mode.gd::GDScript::-1::1741155385::0::1::::<>Control<>::
+Settings-Shadow.gd::GDScript::-1::1741236751::0::1::::<>Control<>::
+Settings_FPS.gd::GDScript::-1::1741070344::0::1::::<>ColorRect<>::
+vsync.gd::GDScript::-1::1741158005::0::1::::<>Control<>::
+window_mode.gd::GDScript::-1::1741154592::0::1::::<>Control<>::
+::res://ForImport/SFX/::1741067738
+button-click-289742.mp3::AudioStreamMP3::2058358501870631704::1741067738::1741067738::1::::<><>::
+hover-button-287656 (mp3cut.net).mp3::AudioStreamMP3::4630508085517076761::1741067738::1741067738::1::::<><>::
+::res://SaveFile/::1741048527

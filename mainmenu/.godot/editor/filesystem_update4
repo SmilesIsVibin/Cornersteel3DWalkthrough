@@ -1,0 +1,15 @@
+res://ForImport/SCENE/MainMenu.tscn
+res://ForImport/Script/buttonSFX.gd
+res://ForImport/Script/FPSToggle.gd
+res://ForImport/Script/KeyBinds.gd
+res://ForImport/Script/main_menu.gd
+res://ForImport/Script/main_settings.gd
+res://ForImport/Script/master_slider.gd
+res://ForImport/Script/Pause-Shadow.gd
+res://ForImport/Script/PauseMenu.gd
+res://ForImport/Script/Pause_FPS.gd
+res://ForImport/Script/reso_mode.gd
+res://ForImport/Script/Settings-Shadow.gd
+res://ForImport/Script/Settings_FPS.gd
+res://ForImport/Script/vsync.gd
+res://ForImport/Script/window_mode.gd
