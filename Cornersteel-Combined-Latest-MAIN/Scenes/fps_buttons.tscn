@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dy3th0rod80kb"]
 
-[ext_resource type="Script" uid="uid://cqimcg5kfgejj" path="res://ForImport/Script/FPSToggle.gd" id="1_mohsk"]
-[ext_resource type="Script" uid="uid://be0oipvf81bcc" path="res://ForImport/Script/buttonSFX.gd" id="2_bee0n"]
+[ext_resource type="Script" path="res://GDScripts/UI/FPSToggle.gd" id="1_vhm7s"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="2_do1ru"]
 
 [node name="Display_Option" type="Control"]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mohsk")
+script = ExtResource("1_vhm7s")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -41,7 +41,7 @@ theme_override_constants/separation = 20
 [node name="Button" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("music_Player")]
 custom_minimum_size = Vector2(265, 12)
 layout_mode = 2
-script = ExtResource("2_bee0n")
+script = ExtResource("2_do1ru")
 music_Player = NodePath("../../SFX")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]

@@ -1,0 +1,149 @@
+[gd_scene load_steps=8 format=3 uid="uid://v66yd7frjw5t"]
+
+[ext_resource type="Script" path="res://GDScripts/UI/Clock.gd" id="1_81nsa"]
+[ext_resource type="PackedScene" uid="uid://dhvd5r2lot1m2" path="res://ForImport/UI_TIme.tscn" id="2_ceja5"]
+[ext_resource type="PackedScene" uid="uid://ca67i6183gres" path="res://ForImport/timePauseUI.tscn" id="3_ycxap"]
+[ext_resource type="PackedScene" uid="uid://ihlj8bsct7vb" path="res://ForImport/AddHrs.tscn" id="4_rint2"]
+[ext_resource type="PackedScene" uid="uid://dsphalu8q8xcm" path="res://ForImport/titleSched.tscn" id="5_6aqao"]
+[ext_resource type="PackedScene" uid="uid://8cwdmqt43udk" path="res://ForImport/SchedEdit.tscn" id="6_jmp8s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1vh"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+
+[node name="Main STATS" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_81nsa")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 1
+theme_override_constants/side_margin = -1
+theme_override_constants/icon_separation = 1
+current_tab = 0
+
+[node name="Time" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Time"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Time/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 110
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Time/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 900
+
+[node name="Control" parent="TabContainer/Time/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_ceja5")]
+layout_mode = 2
+
+[node name="Time" parent="TabContainer/Time/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_ycxap")]
+layout_mode = 2
+
+[node name="Hrs" parent="TabContainer/Time/MarginContainer/VBoxContainer" instance=ExtResource("4_rint2")]
+layout_mode = 2
+hrs = true
+
+[node name="Min" parent="TabContainer/Time/MarginContainer/VBoxContainer" instance=ExtResource("4_rint2")]
+layout_mode = 2
+min = true
+
+[node name="Sec" parent="TabContainer/Time/MarginContainer/VBoxContainer" instance=ExtResource("4_rint2")]
+layout_mode = 2
+sec = true
+
+[node name="Schedule" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="TabContainer" type="TabContainer" parent="TabContainer/Schedule"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_nu1vh")
+tab_alignment = 1
+current_tab = 0
+drag_to_rearrange_enabled = true
+
+[node name="Open" type="VBoxContainer" parent="TabContainer/Schedule/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+alignment = 1
+metadata/_tab_index = 0
+
+[node name="Title" parent="TabContainer/Schedule/TabContainer/Open" instance=ExtResource("5_6aqao")]
+layout_mode = 2
+
+[node name="Sched" parent="TabContainer/Schedule/TabContainer/Open" instance=ExtResource("6_jmp8s")]
+layout_mode = 2
+AC = true
+Open = true
+
+[node name="Sched2" parent="TabContainer/Schedule/TabContainer/Open" instance=ExtResource("6_jmp8s")]
+layout_mode = 2
+Lights = true
+Open = true
+
+[node name="Sched3" parent="TabContainer/Schedule/TabContainer/Open" instance=ExtResource("6_jmp8s")]
+layout_mode = 2
+PC = true
+Open = true
+
+[node name="Close" type="VBoxContainer" parent="TabContainer/Schedule/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 90
+alignment = 1
+metadata/_tab_index = 1
+
+[node name="Title" parent="TabContainer/Schedule/TabContainer/Close" instance=ExtResource("5_6aqao")]
+layout_mode = 2
+
+[node name="Sched" parent="TabContainer/Schedule/TabContainer/Close" instance=ExtResource("6_jmp8s")]
+layout_mode = 2
+AC = true
+close = true
+
+[node name="Sched2" parent="TabContainer/Schedule/TabContainer/Close" instance=ExtResource("6_jmp8s")]
+layout_mode = 2
+Lights = true
+close = true
+
+[node name="Sched3" parent="TabContainer/Schedule/TabContainer/Close" instance=ExtResource("6_jmp8s")]
+layout_mode = 2
+PC = true
+close = true
+
+[node name="Voltage" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

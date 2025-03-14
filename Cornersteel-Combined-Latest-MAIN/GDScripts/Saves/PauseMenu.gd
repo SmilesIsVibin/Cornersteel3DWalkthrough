@@ -1,49 +1,57 @@
 extends Control
 
 @export var light2: DirectionalLight3D
-var fps_ui: bool = false
-var light1: bool = false
 @export var pause_panel: Control
 @export var fps_rect: ColorRect
+@export var _Time : Control
+@export var omni_lights : Array[OmniLight3D] #Array for lights
+@export var Monitor : Array[MeshInstance3D] #Array for set of monitors
+
 var is_paused : bool = false;
+var fps_ui: bool = false
+var light1: bool = false
+var UI_Time : bool = false
 
 func _ready() -> void:
+	UI_Time = Clock.UI_Time
 	pause_panel.visible = false
 	is_paused = false
-
 # Process is called every frame. It updates the UI and light shadow state.
 func _process(_delta: float) -> void:
+	UI_Time = Clock.UI_Time
 	_process_me()
 	_light_off()
+	TimeShow()
+	light_energy_low()
+	monitor_On_OFf()
+	Ac_ON_OFF()
+	rotate_light_based_on_time()
+	on_off()
 	
 	if Input.is_action_just_pressed("pause_key"):
 		toggle_panel()
-
 # Enables or disables the shadow on the directional light based on light1's value.
 func _light_off() -> void:
 	if light1:
 		light2.shadow_enabled = true
 	else:
 		light2.shadow_enabled = false
-
 # Sets the light state and prints its current value.
-func set_light_off(value: bool) -> void:
+func _set_light_off(value: bool) -> void:
 	light1 = value
 	print("light1 set to:", light1)
-
 # Updates the fps_ui variable and prints its new value.
 func set_fps_ui(value: bool) -> void:
 	fps_ui = value
 	print("fps_ui set to:", fps_ui)
-
 # Updates the visibility of the UI element based on fps_ui.
 func _process_me() -> void:
 	if fps_ui:
-		fps_rect.visible = true  # Fixed typo here
+		fps_rect.visible = true  
 	else:
 		fps_rect.visible = false
-		
-func toggle_panel(): # Function use to enable / disable the control guide interface
+# Function use to enable / disable the control guide interface
+func toggle_panel():
 	if is_paused:
 		pause_panel.visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -51,3 +59,46 @@ func toggle_panel(): # Function use to enable / disable the control guide interf
 		pause_panel.visible = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	is_paused = !is_paused
+# Function to show Time in game
+func TimeShow() -> void:
+	if UI_Time:
+		_Time.visible = true
+	else:
+		_Time.visible = false
+#Turning off the lights
+func light_energy_low() -> void:
+	if not Clock.is_Lights_on:
+		for light in omni_lights:
+			light.light_energy = 0.0
+	else:
+		for light in omni_lights:
+			light.light_energy = 3.0
+#turning off the monitor
+func monitor_On_OFf() -> void:
+	if not Clock.is_PC_on:
+		for PC in Monitor:
+			PC.visible = false
+	else:
+		for PC in Monitor:
+			PC.visible = true
+#turning off the AC
+func Ac_ON_OFF() -> void:
+	if not Clock.is_Ac_on:
+		print("AC OFF")
+	else:
+		print("AC ON")
+#Rotation of the Directional light
+func rotate_light_based_on_time() -> void:
+	var rotation_angle = (Clock.current_hour / 24.0) * 360.0
+	light2.rotation_degrees.x = rotation_angle + 90 
+#Turning off the energy og light
+func on_off() -> void:
+	# Example of logic for turning something on or off based on time
+	if Clock.current_hour >= 6 and Clock.current_hour < 18:
+		# Daytime logic (e.g., light should be bright)
+		light2.light_energy = 1.0  # Full intensity during the day
+		light2.light_color = Color(1, 1, 1)  # White light (sunlight)
+	else:
+		# Nighttime logic (e.g., light should be dim or off)
+		light2.light_energy = 0  # Dim light or you can set to 0 for complete darkness
+		light2.light_color = Color(0.2, 0.2, 0.5)  # Blueish night light or you can set it to black for darkness

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4odese28ifh" path="res://Scenes/VSYNC.tscn" id="6_ov011"]
 [ext_resource type="PackedScene" uid="uid://qnue1ong4d27" path="res://Scenes/MouseSens.tscn" id="7_n2mtq"]
 [ext_resource type="PackedScene" uid="uid://c2xdloidy2a48" path="res://Scenes/Shadwo.tscn" id="7_p6hi2"]
-[ext_resource type="Script" uid="uid://d3i1sj8ax14vs" path="res://GDScripts/Saves/Settings-Shadow.gd" id="7_vpk63"]
+[ext_resource type="Script" path="res://GDScripts/Saves/Settings-Shadow.gd" id="7_vpk63"]
 
 [sub_resource type="GDScript" id="GDScript_jbni2"]
 script/source = "extends Control
@@ -64,9 +64,10 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="Sounds" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -102,7 +103,6 @@ size_flags_horizontal = 4
 bus_name = "SFX"
 
 [node name="Video" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

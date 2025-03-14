@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://uxt62aylsgkk" path="res://Assets/Images/Backgrounds/Title-Render.png" id="2_koqhg"]
 [ext_resource type="FontFile" uid="uid://cp0younystipd" path="res://Assets/Fonts/Radium Corp.ttf" id="3_5a5tk"]
 [ext_resource type="FontFile" uid="uid://btfviyro4agja" path="res://Assets/Fonts/Square Game.otf" id="4_6rdb1"]
-[ext_resource type="PackedScene" uid="uid://w0i1g6wc80jo" path="res://Scenes/Main_settings.tscn" id="5_pgwql"]
+[ext_resource type="PackedScene" uid="uid://jr1hdhe5g1bo" path="res://Scenes/Main_settings.tscn" id="5_pgwql"]
 [ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://Scenes/fps.tscn" id="6_0dqxn"]
 [ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="6_kbwsw"]
 [ext_resource type="AudioStream" uid="uid://j3j1ulibsd2t" path="res://Assets/BackgroundTracks/lofi-beat-chill-7373.mp3" id="7_s3ulq"]

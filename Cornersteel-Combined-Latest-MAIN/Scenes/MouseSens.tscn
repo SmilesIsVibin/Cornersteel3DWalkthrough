@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://qnue1ong4d27"]
 
-[ext_resource type="Script" uid="uid://ufsyc1ky103" path="res://ForImport/Script/KeyBinds.gd" id="1_0jnux"]
-[ext_resource type="PackedScene" uid="uid://doss6nk5k1lgs" path="res://ForImport/SCENE/action.tscn" id="2_fds17"]
+[ext_resource type="Script" path="res://GDScripts/Saves/KeyBinds.gd" id="1_xlc6e"]
+[ext_resource type="PackedScene" uid="uid://doss6nk5k1lgs" path="res://Scenes/action.tscn" id="2_fds17"]
 
 [node name="KeyBInds" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0jnux")
+script = ExtResource("1_xlc6e")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

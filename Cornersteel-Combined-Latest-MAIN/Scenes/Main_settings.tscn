@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://w0i1g6wc80jo"]
+[gd_scene load_steps=9 format=3 uid="uid://jr1hdhe5g1bo"]
 
-[ext_resource type="Script" uid="uid://d0qymu6dd3wfq" path="res://GDScripts/Saves/main_settings.gd" id="1_3nwd6"]
+[ext_resource type="Script" path="res://GDScripts/Saves/main_settings.gd" id="1_3nwd6"]
 [ext_resource type="FontFile" uid="uid://btfviyro4agja" path="res://Assets/Fonts/Square Game.otf" id="1_d1yrm"]
 [ext_resource type="PackedScene" uid="uid://bf1ogejo0mbyw" path="res://Scenes/Settings.tscn" id="2_fflc4"]
-[ext_resource type="Script" uid="uid://be0oipvf81bcc" path="res://GDScripts/UI/buttonSFX.gd" id="4_pdxkf"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="4_pdxkf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dpakm"]
 
@@ -52,9 +52,9 @@ size_flags_vertical = 3
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("music_Player")]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.539663, 0.539663, 0.539663, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.764385, 0.31273, 1.92523e-07, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dpakm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3w7pf")

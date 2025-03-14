@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://8e4cse562kxx"]
 
 [ext_resource type="PackedScene" uid="uid://bfxvjge4avgn5" path="res://Scenes/Stats.tscn" id="1_3saj1"]
-[ext_resource type="Script" uid="uid://big5525mg5po8" path="res://GDScripts/Saves/window_mode.gd" id="2_4dplk"]
-[ext_resource type="Script" uid="uid://be0oipvf81bcc" path="res://GDScripts/UI/buttonSFX.gd" id="3_6ukbc"]
+[ext_resource type="Script" path="res://GDScripts/Saves/window_mode.gd" id="2_4dplk"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="3_6ukbc"]
 
 [node name="WindowMode" instance=ExtResource("1_3saj1")]
 anchors_preset = 14

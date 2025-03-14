@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bj4odese28ifh"]
 
-[ext_resource type="Script" uid="uid://dejx44ptj5ktt" path="res://ForImport/Script/vsync.gd" id="1_xgkqy"]
-[ext_resource type="Script" uid="uid://be0oipvf81bcc" path="res://ForImport/Script/buttonSFX.gd" id="2_r45gg"]
+[ext_resource type="Script" path="res://GDScripts/Saves/vsync.gd" id="1_io2cp"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="2_dejfo"]
 
 [node name="VSync" type="Control" node_paths=PackedStringArray("Bt_txt")]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_xgkqy")
+script = ExtResource("1_io2cp")
 Bt_txt = NodePath("HBoxContainer/Button")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -43,7 +43,7 @@ theme_override_constants/separation = 20
 [node name="Button" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("music_Player")]
 custom_minimum_size = Vector2(265, 12)
 layout_mode = 2
-script = ExtResource("2_r45gg")
+script = ExtResource("2_dejfo")
 music_Player = NodePath("../../SFX")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]

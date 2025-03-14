@@ -15,7 +15,7 @@ func _ready() -> void:
 	update_button_text()
 
 func update_button_text() -> void:
-	Bt_txt.text = "OFF" if FPSOn else "ON"
+	Bt_txt.text = "ON" if FPSOn else "OFF"
 	
 
 func _on_button_pressed() -> void:
@@ -23,11 +23,11 @@ func _on_button_pressed() -> void:
 	update_button_text()
 	save_settings()
 	if FPSOn:
-		light2.set_light_off(FPSOn)
-		print("ShadowOff")
-	else:
-		light2.set_light_off(FPSOn)
+		light2._set_light_off(FPSOn)
 		print("ShadowON")
+	else:
+		light2._set_light_off(FPSOn)
+		print("ShadowOff")
 
 func save_settings() -> void:
 	var settings_data: Dictionary = {}
@@ -64,8 +64,8 @@ func load_settings() -> void:
 		FPSOn = parsed.get("Shadow", false)
 		
 	if FPSOn:
-		light2.set_light_off(FPSOn)
-		print("ShadowOff")
-	else:
-		light2.set_light_off(FPSOn)
+		light2._set_light_off(FPSOn)
 		print("ShadowON")
+	else:
+		light2._set_light_off(FPSOn)
+		print("ShadowOff")

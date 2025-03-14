@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2xdloidy2a48"]
 
-[ext_resource type="Script" uid="uid://64oyk7cot2ou" path="res://GDScripts/Saves/Pause-Shadow.gd" id="1_nkq7l"]
-[ext_resource type="Script" uid="uid://be0oipvf81bcc" path="res://GDScripts/UI/buttonSFX.gd" id="2_0m6tl"]
+[ext_resource type="Script" path="res://GDScripts/Saves/Pause-Shadow.gd" id="1_nkq7l"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="2_0m6tl"]
 
 [node name="Shadow" type="Control" node_paths=PackedStringArray("Bt_txt")]
 layout_mode = 3

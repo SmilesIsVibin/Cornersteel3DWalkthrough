@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0.083392, 0.083392, 0.083392, 1)
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
+[autoload]
+
+Clock="*res://GDScripts/UI/Clock.gd"
+
 [display]
 
 window/size/mode=3
