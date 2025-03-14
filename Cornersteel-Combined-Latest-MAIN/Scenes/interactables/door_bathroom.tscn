@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://sxkh8lx2b8rk"]
+[gd_scene load_steps=18 format=4 uid="uid://sxkh8lx2b8rk"]
 
 [ext_resource type="Script" path="res://GDScripts/Interactable/door.gd" id="1_dds84"]
 [ext_resource type="Texture2D" uid="uid://ddeir7q4iy8ht" path="res://Assets/Models/CornersteelOfficeEnvironment_Door-Bathroom-Diffuse.png" id="1_vka3s"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://urq0vbayyxl8" path="res://Assets/Models/CornersteelOfficeEnvironment_Door-Bathroom-Normal.png" id="3_i2mtk"]
 [ext_resource type="Texture2D" uid="uid://8t3d50hbvysg" path="res://Assets/Models/CornersteelOfficeEnvironment_DoorKnob-Diffuse.png" id="4_fqeyd"]
 [ext_resource type="Texture2D" uid="uid://csoqibxhv4usa" path="res://Assets/Models/CornersteelOfficeEnvironment_DoorKnob-Roughness.png" id="5_4vmb4"]
+[ext_resource type="Script" path="res://GDScripts/Interactable/outline.gd" id="5_5ft2g"]
 [ext_resource type="Texture2D" uid="uid://c5byv1ovqfb6d" path="res://Assets/Models/CornersteelOfficeEnvironment_DoorKnob-Normal.png" id="6_a0cdg"]
+[ext_resource type="Material" uid="uid://dbx1dj7rysohs" path="res://Assets/Materials/outline_material.tres" id="6_f0qfg"]
 [ext_resource type="AudioStream" uid="uid://bdany2di0ippt" path="res://Assets/SFX/Door.wav" id="8_cvsuj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6r1e4"]
@@ -123,6 +125,8 @@ shape = SubResource("BoxShape3D_6r1e4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_fw16l")
 skeleton = NodePath("")
+script = ExtResource("5_5ft2g")
+outline_material = ExtResource("6_f0qfg")
 
 [node name="DoorDoorKnob" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 4.05, 3.065, 0)

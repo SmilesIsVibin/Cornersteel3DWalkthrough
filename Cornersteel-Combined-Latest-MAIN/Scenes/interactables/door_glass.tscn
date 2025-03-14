@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://b0iay03kgi63g"]
+[gd_scene load_steps=21 format=4 uid="uid://b0iay03kgi63g"]
 
 [ext_resource type="Script" path="res://GDScripts/Interactable/door.gd" id="1_1ag6m"]
+[ext_resource type="Script" path="res://GDScripts/Interactable/outline.gd" id="2_05502"]
 [ext_resource type="Texture2D" uid="uid://dfp386n7pk7mw" path="res://Assets/Models/CornersteelOfficeEnvironment_Door-Glass-Handle-Diffuse.png" id="2_gtru4"]
+[ext_resource type="Material" uid="uid://dbx1dj7rysohs" path="res://Assets/Materials/outline_material.tres" id="3_a05xe"]
 [ext_resource type="Texture2D" uid="uid://bwjcbjyuqekwm" path="res://Assets/Models/CornersteelOfficeEnvironment_Door-Glass-Handle-Roughness.png" id="3_l5k5c"]
 [ext_resource type="Texture2D" uid="uid://xprlimb4e4av" path="res://Assets/Models/CornersteelOfficeEnvironment_Door-Glass-Handle-Normal.png" id="4_7prdl"]
 [ext_resource type="Texture2D" uid="uid://1hg0iednodhl" path="res://Assets/Models/CornersteelOfficeEnvironment_Door-Glass-Stopper-Diffuse.png" id="5_021w8"]
@@ -11,47 +13,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vtdg6"]
 size = Vector3(4.5, 9, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh1yy"]
-resource_name = "GlassDark"
-transparency = 4
-cull_mode = 2
-albedo_color = Color(0.44238, 0.467403, 0.481683, 0.5)
-metallic = 0.5
-roughness = 0.5
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_ui0q1"]
-_surfaces = [{
-"aabb": AABB(0, 0.0235, -0.025, 4.5, 8.93, 0.05),
-"format": 34359742465,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
-"name": "GlassDark",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("AAAAABmDwDzPzMw8AAAAAIlBD0HPzMy8AAAAAIlBD0HPzMw8AAAAABmDwDzPzMy8AACQQIlBD0HPzMy8AACQQBmDwDzPzMw8AACQQIlBD0HPzMw8AACQQBmDwDzPzMy8")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_lwapt"]
-resource_name = "CornersteelOfficeEnvironment_Cube_297"
-lightmap_size_hint = Vector2i(54, 58)
-_surfaces = [{
-"aabb": AABB(0, 0.0235, -0.025, 4.5, 8.93, 0.05),
-"attribute_data": PackedByteArray("oM17P4Dc/jsmtFc/TyNsP74zfT8AAIA/JrQXPGG5Zz+gzXs/AACAPya0FzxPI2w/vjN9P4Dc/jsmtFc/YblnPwAAAACA3P47JrQXPMs9DTygzfs+AACAPxzH8T7d00g/AAAAAAAAgD8mtBc83dNIP6DN+z6A3P47HMfxPss9DTy/M30/gNz+Oya0Vz+oEVY/3pl+PwAAgD8mtBc8lntaP78zfT8AAIA/JrQXPKgRVj/emX4/gNz+Oya0Vz+We1o/oM37PoDc/jtyHAc/yz0NPKDNez8AAIA/L6F9P93TSD+gzfs+AACAP3IcBz/d00g/oM17P4Dc/jsvoX0/yz0NPP7/fz8AAIA/HMfxPhpheT/fmX4/AAAAPya0FzwJy30//v9/PwAAAD8mtBc8GmF5P+CZfj8AAIA/HMfxPgnLfT8AAIA/AAAAP3IcBz8aYXk/4Jl+PwAAAAAvoX0/Cct9P/7/fz8AAAAAL6F9PxpheT/hmX4/AAAAP3IcBz8Jy30/"),
-"format": 34359742519,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
-"material": SubResource("StandardMaterial3D_oh1yy"),
-"name": "GlassDark",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("AAAAABmDwDzPzMw8AAAAAIlBD0HPzMy8AAAAAIlBD0HPzMw8AAAAABmDwDzPzMy8AAAAABmDwDzPzMy8AACQQIlBD0HPzMy8AAAAAIlBD0HPzMy8AACQQBmDwDzPzMy8AACQQBmDwDzPzMy8AACQQIlBD0HPzMw8AACQQIlBD0HPzMy8AACQQBmDwDzPzMw8AACQQBmDwDzPzMw8AAAAAIlBD0HPzMw8AACQQIlBD0HPzMw8AAAAABmDwDzPzMw8AAAAABmDwDzPzMy8AACQQBmDwDzPzMw8AACQQBmDwDzPzMy8AAAAABmDwDzPzMw8AACQQIlBD0HPzMy8AAAAAIlBD0HPzMw8AAAAAIlBD0HPzMy8AACQQIlBD0HPzMw8AAD/f/////8AAP9//////wAA/3//////AAD/f///////////////v/////////+//////////7//////////v////3//f/+/////f/9//7////9//3//v////3//f/+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//fwAA//////9/AAD//////38AAP//////fwAA//////9//////////3//////////f/////////9/////////")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ui0q1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xhmsh"]
 resource_name = "Door-Glass-Handle-Texture"
@@ -145,6 +106,47 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uedkt")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh1yy"]
+resource_name = "GlassDark"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.44238, 0.467403, 0.481683, 0.5)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ui0q1"]
+_surfaces = [{
+"aabb": AABB(0, 0.0235, -0.025, 4.5, 8.93, 0.05),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "GlassDark",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAABmDwDzPzMw8AAAAAIlBD0HPzMy8AAAAAIlBD0HPzMw8AAAAABmDwDzPzMy8AACQQIlBD0HPzMy8AACQQBmDwDzPzMw8AACQQIlBD0HPzMw8AACQQBmDwDzPzMy8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lwapt"]
+resource_name = "CornersteelOfficeEnvironment_Cube_297"
+lightmap_size_hint = Vector2i(54, 58)
+_surfaces = [{
+"aabb": AABB(0, 0.0235, -0.025, 4.5, 8.93, 0.05),
+"attribute_data": PackedByteArray("oM17P4Dc/jsmtFc/TyNsP74zfT8AAIA/JrQXPGG5Zz+gzXs/AACAPya0FzxPI2w/vjN9P4Dc/jsmtFc/YblnPwAAAACA3P47JrQXPMs9DTygzfs+AACAPxzH8T7d00g/AAAAAAAAgD8mtBc83dNIP6DN+z6A3P47HMfxPss9DTy/M30/gNz+Oya0Vz+oEVY/3pl+PwAAgD8mtBc8lntaP78zfT8AAIA/JrQXPKgRVj/emX4/gNz+Oya0Vz+We1o/oM37PoDc/jtyHAc/yz0NPKDNez8AAIA/L6F9P93TSD+gzfs+AACAP3IcBz/d00g/oM17P4Dc/jsvoX0/yz0NPP7/fz8AAIA/HMfxPhpheT/fmX4/AAAAPya0FzwJy30//v9/PwAAAD8mtBc8GmF5P+CZfj8AAIA/HMfxPgnLfT8AAIA/AAAAP3IcBz8aYXk/4Jl+PwAAAAAvoX0/Cct9P/7/fz8AAAAAL6F9PxpheT/hmX4/AAAAP3IcBz8Jy30/"),
+"format": 34359742519,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_oh1yy"),
+"name": "GlassDark",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAABmDwDzPzMw8AAAAAIlBD0HPzMy8AAAAAIlBD0HPzMw8AAAAABmDwDzPzMy8AAAAABmDwDzPzMy8AACQQIlBD0HPzMy8AAAAAIlBD0HPzMy8AACQQBmDwDzPzMy8AACQQBmDwDzPzMy8AACQQIlBD0HPzMw8AACQQIlBD0HPzMy8AACQQBmDwDzPzMw8AACQQBmDwDzPzMw8AAAAAIlBD0HPzMw8AACQQIlBD0HPzMw8AAAAABmDwDzPzMw8AAAAABmDwDzPzMy8AACQQBmDwDzPzMw8AACQQBmDwDzPzMy8AAAAABmDwDzPzMw8AACQQIlBD0HPzMy8AAAAAIlBD0HPzMw8AAAAAIlBD0HPzMy8AACQQIlBD0HPzMw8AAD/f/////8AAP9//////wAA/3//////AAD/f///////////////v/////////+//////////7//////////v////3//f/+/////f/9//7////9//3//v////3//f/+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//fwAA//////9/AAD//////38AAP//////fwAA//////9//////////3//////////f/////////9/////////")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ui0q1")
+
 [node name="GlassDoorHolder" type="StaticBody3D"]
 script = ExtResource("1_1ag6m")
 
@@ -156,6 +158,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25415, 4.3291, 0)
 remote_path = NodePath("../../CollisionShape3D")
 
 [node name="RemoteTransform3D2" type="RemoteTransform3D" parent="DoorPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25415, 4.3291, 0)
 remote_path = NodePath("../../MeshInstance3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -163,18 +166,20 @@ transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 2.25415, 4.3291
 shape = SubResource("BoxShape3D_vtdg6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
-mesh = SubResource("ArrayMesh_lwapt")
-skeleton = NodePath("")
-
-[node name="Door-Glass-Handle" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24649, 4.48368, 0)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 4.25415, 4.3291, 0)
 mesh = SubResource("ArrayMesh_82u81")
 skeleton = NodePath("")
+script = ExtResource("2_05502")
+outline_material = ExtResource("3_a05xe")
 
 [node name="Door-Glass-Stopper" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07846, 3.96542, -0.0050005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.16803, -0.51826, -0.0050005)
 mesh = SubResource("ArrayMesh_ycwvn")
+skeleton = NodePath("")
+
+[node name="Door-Glass-Main" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.24649, -4.48368, 0)
+mesh = SubResource("ArrayMesh_lwapt")
 skeleton = NodePath("")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

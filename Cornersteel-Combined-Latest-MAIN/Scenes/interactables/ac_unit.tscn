@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfmnc6bxl1css"]
+[gd_scene load_steps=7 format=3 uid="uid://cfmnc6bxl1css"]
 
 [ext_resource type="Script" path="res://GDScripts/Interactable/ac_unit.gd" id="1_v3xyu"]
+[ext_resource type="Script" path="res://GDScripts/Interactable/outline.gd" id="2_4elnm"]
 [ext_resource type="AudioStream" uid="uid://qkg83byc4ksa" path="res://Assets/SFX/switch_01.wav" id="2_67e7y"]
+[ext_resource type="Material" uid="uid://dbx1dj7rysohs" path="res://Assets/Materials/outline_material.tres" id="3_b4anw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xobre"]
 size = Vector3(0.219177, 0.924561, 0.711792)
@@ -20,6 +22,8 @@ shape = SubResource("BoxShape3D_xobre")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.769, 0, 0, 0, 1, 0, 0, 0, 0.769, 0, 0, 0)
 mesh = SubResource("BoxMesh_x06o4")
+script = ExtResource("2_4elnm")
+outline_material = ExtResource("3_b4anw")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_67e7y")
