@@ -1,0 +1,482 @@
+[gd_scene load_steps=19 format=3 uid="uid://c4b1y4dqk8sy7"]
+
+[ext_resource type="PackedScene" uid="uid://cu1oiwt353ycd" path="res://Scenes/player.tscn" id="1_ss51l"]
+[ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://Scenes/fps.tscn" id="4_btjvb"]
+[ext_resource type="PackedScene" uid="uid://t4f1tatiqs2d" path="res://Scenes/Pause.tscn" id="4_ohyl4"]
+[ext_resource type="PackedScene" uid="uid://c7poqso85y7db" path="res://Scenes/Office.tscn" id="5_btjvb"]
+[ext_resource type="PackedScene" uid="uid://b11cnbx5ngji1" path="res://ForImport/SCene/time.tscn" id="6_h1rnu"]
+[ext_resource type="AudioStream" uid="uid://j3j1ulibsd2t" path="res://Assets/BackgroundTracks/lofi-beat-chill-7373.mp3" id="6_ikq1y"]
+
+[sub_resource type="Shader" id="Shader_kk134"]
+code = "
+// NOTE: Shader automatically converted from Godot Engine 4.3.stable.mono's ProceduralSkyMaterial.
+
+shader_type sky;
+render_mode use_debanding;
+
+uniform vec4 sky_top_color : source_color = vec4(0.385, 0.454, 0.55, 1.0);
+uniform vec4 sky_horizon_color : source_color = vec4(0.646, 0.656, 0.67, 1.0);
+uniform float sky_curve : hint_range(0, 1) = 0.15;
+uniform float sky_energy = 1.0; // In Lux.
+uniform sampler2D sky_cover : filter_linear, source_color, hint_default_black;
+uniform vec4 sky_cover_modulate : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 ground_bottom_color : source_color = vec4(0.2, 0.169, 0.133, 1.0);
+uniform vec4 ground_horizon_color : source_color = vec4(0.646, 0.656, 0.67, 1.0);
+uniform float ground_curve : hint_range(0, 1) = 0.02;
+uniform float ground_energy = 1.0;
+uniform float sun_angle_max = 30.0;
+uniform float sun_curve : hint_range(0, 1) = 0.15;
+uniform float exposure : hint_range(0, 128) = 1.0;
+
+uniform sampler2D cloudtexture;
+uniform sampler2D cloudtexture2;
+
+
+uniform vec2 cloud_Direction;
+uniform vec2 cloud_direction2;
+uniform vec2 cloud_scale;
+uniform float cloud_distance;
+uniform float cloud_speed;
+uniform float cloud_speed2;
+
+void sky() {
+	float v_angle = acos(clamp(EYEDIR.y, -1.0, 1.0));
+	float c = (1.0 - v_angle / (PI * 0.5));
+	vec3 sky = mix(sky_horizon_color.rgb, sky_top_color.rgb, clamp(1.0 - pow(1.0 - c, 1.0 / sky_curve), 0.0, 1.0));
+	sky *= sky_energy;
+
+	if (LIGHT0_ENABLED) {
+		float sun_angle = acos(dot(LIGHT0_DIRECTION, EYEDIR));
+		if (sun_angle < LIGHT0_SIZE) {
+			sky = LIGHT0_COLOR * LIGHT0_ENERGY;
+		} else if (sun_angle < sun_angle_max) {
+			float c2 = (sun_angle - LIGHT0_SIZE) / (sun_angle_max - LIGHT0_SIZE);
+			sky = mix(LIGHT0_COLOR * LIGHT0_ENERGY, sky, clamp(1.0 - pow(1.0 - c2, 1.0 / sun_curve), 0.0, 1.0));
+		}
+	}
+
+	if (LIGHT1_ENABLED) {
+		float sun_angle = acos(dot(LIGHT1_DIRECTION, EYEDIR));
+		if (sun_angle < LIGHT1_SIZE) {
+			sky = LIGHT1_COLOR * LIGHT1_ENERGY;
+		} else if (sun_angle < sun_angle_max) {
+			float c2 = (sun_angle - LIGHT1_SIZE) / (sun_angle_max - LIGHT1_SIZE);
+			sky = mix(LIGHT1_COLOR * LIGHT1_ENERGY, sky, clamp(1.0 - pow(1.0 - c2, 1.0 / sun_curve), 0.0, 1.0));
+		}
+	}
+
+	if (LIGHT2_ENABLED) {
+		float sun_angle = acos(dot(LIGHT2_DIRECTION, EYEDIR));
+		if (sun_angle < LIGHT2_SIZE) {
+			sky = LIGHT2_COLOR * LIGHT2_ENERGY;
+		} else if (sun_angle < sun_angle_max) {
+			float c2 = (sun_angle - LIGHT2_SIZE) / (sun_angle_max - LIGHT2_SIZE);
+			sky = mix(LIGHT2_COLOR * LIGHT2_ENERGY, sky, clamp(1.0 - pow(1.0 - c2, 1.0 / sun_curve), 0.0, 1.0));
+		}
+	}
+
+	if (LIGHT3_ENABLED) {
+		float sun_angle = acos(dot(LIGHT3_DIRECTION, EYEDIR));
+		if (sun_angle < LIGHT3_SIZE) {
+			sky = LIGHT3_COLOR * LIGHT3_ENERGY;
+		} else if (sun_angle < sun_angle_max) {
+			float c2 = (sun_angle - LIGHT3_SIZE) / (sun_angle_max - LIGHT3_SIZE);
+			sky = mix(LIGHT3_COLOR * LIGHT3_ENERGY, sky, clamp(1.0 - pow(1.0 - c2, 1.0 / sun_curve), 0.0, 1.0));
+		}
+	}
+
+	vec4 sky_cover_texture = texture(sky_cover, SKY_COORDS);
+	sky += (sky_cover_texture.rgb * sky_cover_modulate.rgb) * sky_cover_texture.a * sky_cover_modulate.a * sky_energy;
+
+	c = (v_angle - (PI * 0.5)) / (PI * 0.5);
+	vec3 ground = mix(ground_horizon_color.rgb, ground_bottom_color.rgb, clamp(1.0 - pow(1.0 - c, 1.0 / ground_curve), 0.0, 1.0));
+	ground *= ground_energy;
+	
+	vec2 sky_Uv = EYEDIR.xz / EYEDIR.y;
+	vec3 clouds = texture(cloudtexture,sky_Uv * cloud_scale + TIME * cloud_Direction *cloud_speed).rgb - texture(cloudtexture2, sky_Uv * cloud_scale + TIME * cloud_direction2 * cloud_speed2).rgb;
+	clouds = clouds - smoothstep(0.0, EYEDIR.y, cloud_distance);
+	clouds = clamp(clouds, 0.0, 1.0);	
+	sky += clouds;
+	
+	COLOR = mix(ground, sky, step(0.0, EYEDIR.y)) * exposure;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ws166"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lx8co"]
+seamless = true
+noise = SubResource("FastNoiseLite_ws166")
+
+[sub_resource type="Gradient" id="Gradient_vequx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6w2gu"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_im4e7"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_vequx")
+noise = SubResource("FastNoiseLite_6w2gu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ihv5m"]
+shader = SubResource("Shader_kk134")
+shader_parameter/sky_top_color = Color(0.176471, 0.266667, 0.509804, 1)
+shader_parameter/sky_horizon_color = Color(0.329412, 0.419608, 0.670588, 1)
+shader_parameter/sky_curve = 0.15
+shader_parameter/sky_energy = 1.0
+shader_parameter/sky_cover_modulate = Color(1, 1, 1, 1)
+shader_parameter/ground_bottom_color = Color(0.2, 0.169, 0.133, 1)
+shader_parameter/ground_horizon_color = Color(0.329412, 0.419608, 0.670588, 1)
+shader_parameter/ground_curve = 0.02
+shader_parameter/ground_energy = 1.0
+shader_parameter/sun_angle_max = 0.523599
+shader_parameter/sun_curve = 0.15
+shader_parameter/exposure = 1.0
+shader_parameter/cloud_Direction = null
+shader_parameter/cloud_direction2 = null
+shader_parameter/cloud_scale = Vector2(0.05, 0.05)
+shader_parameter/cloud_distance = 0.035
+shader_parameter/cloud_speed = 0.006
+shader_parameter/cloud_speed2 = 0.005
+shader_parameter/cloudtexture = SubResource("NoiseTexture2D_lx8co")
+shader_parameter/cloudtexture2 = SubResource("NoiseTexture2D_im4e7")
+
+[sub_resource type="Sky" id="Sky_yxoiy"]
+sky_material = SubResource("ShaderMaterial_ihv5m")
+
+[sub_resource type="Environment" id="Environment_702hu"]
+background_mode = 2
+sky = SubResource("Sky_yxoiy")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btjvb"]
+size = Vector3(9.81372, 8.66565, 6.76897)
+
+[sub_resource type="BoxMesh" id="BoxMesh_btjvb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wgc0a"]
+
+[node name="WorldScene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+shadow_reverse_cull_face = true
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 500.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_702hu")
+
+[node name="Player" parent="." instance=ExtResource("1_ss51l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5206, -1.1353, 5.08787)
+
+[node name="OmniLights" type="Node" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.47527, -0.5, -2.31685)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.011, -0.5, -20.3398)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7873, -0.5, 17.895)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.6759, -0.5, 16.5284)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22331, -0.5, -20.6216)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D17" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.24039, -0.5, 25.7753)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8966, -0.5, -3.03777)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5334, -0.5, 31.0693)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D18" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2721, -0.5, 14.474)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.7494, -0.5, 31.7752)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D20" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.3282, -0.5, 14.5644)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0172, -0.5, 5.14216)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D22" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.7168, -0.5, 4.29583)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.1796, -0.5, 3.94189)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.87449, -0.5, 17.4537)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.865, -0.5, 13.3701)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5565, -0.5, -2.04193)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.8865, -0.5, -18.8352)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23049, -0.5, -33.4697)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.9543, -0.5, -19.9499)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D15" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.3057, 0.156574, -19.5255)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D16" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.17, -0.5, -11.6757)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D23" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.3673, -0.5, -3.83267)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.39, -0.5, -15.4913)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D25" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.1084, -0.5, -1.71293)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D26" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5114, -0.5, 24.3599)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="OmniLight3D27" type="OmniLight3D" parent="OmniLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2121, -0.5, -36.9007)
+visible = false
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 3.0
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="FPS" parent="." instance=ExtResource("4_btjvb")]
+mouse_filter = 2
+
+[node name="Time" parent="." instance=ExtResource("6_h1rnu")]
+mouse_filter = 2
+
+[node name="Pause" parent="." node_paths=PackedStringArray("light2", "worldcolor", "pause_panel", "fps_rect", "_Time", "Monitor", "WORLD") instance=ExtResource("4_ohyl4")]
+light2 = NodePath("../DirectionalLight3D")
+worldcolor = NodePath("../WorldEnvironment")
+pause_panel = NodePath(".")
+fps_rect = NodePath("../FPS")
+_Time = NodePath("../Time")
+Monitor = [NodePath("../MeshInstance3D")]
+WORLD = NodePath("../CornersteelOfficeEnvironment")
+
+[node name="CornersteelOfficeEnvironment" parent="." instance=ExtResource("5_btjvb")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -4.28685, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5634, 0, 14.2135)
+disable_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_btjvb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(9.34739, 0, 0, 0, 8.70925, 0, 0, 0, 7.19262, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_btjvb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ikq1y")
+volume_db = -12.0
+autoplay = true
+bus = &"MUSIC"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.131571, 0, 0, 0, 0.797534, 0, 0, 0, 1.39965, 14.5995, -2.24677, 0.455715)
+mesh = SubResource("BoxMesh_wgc0a")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.93, 0, 0)
+light_color = Color(0.804939, 0.814649, 0.675846, 1)
+light_energy = 0.1
+light_indirect_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+shadow_reverse_cull_face = true
+omni_range = 10.0

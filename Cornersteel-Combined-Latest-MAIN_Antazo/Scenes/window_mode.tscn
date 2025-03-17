@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://8e4cse562kxx"]
+[gd_scene load_steps=5 format=3 uid="uid://8e4cse562kxx"]
 
 [ext_resource type="PackedScene" uid="uid://bfxvjge4avgn5" path="res://Scenes/Stats.tscn" id="1_3saj1"]
-[ext_resource type="Script" uid="uid://big5525mg5po8" path="res://GDScripts/Saves/window_mode.gd" id="2_4dplk"]
-[ext_resource type="Script" uid="uid://be0oipvf81bcc" path="res://GDScripts/UI/buttonSFX.gd" id="3_6ukbc"]
+[ext_resource type="Script" path="res://GDScripts/Saves/window_mode.gd" id="2_4dplk"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="3_6ukbc"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="3_d4cko"]
 
 [node name="WindowMode" instance=ExtResource("1_3saj1")]
 anchors_preset = 14
@@ -27,6 +28,7 @@ grow_vertical = 2
 theme_override_constants/separation = 150
 
 [node name="Label" parent="HBoxContainer" index="0"]
+theme_override_fonts/font = ExtResource("3_d4cko")
 theme_override_font_sizes/font_size = 20
 text = "Display"
 
@@ -35,6 +37,7 @@ theme_override_constants/separation = 20
 
 [node name="OptionButton" parent="HBoxContainer" index="2" node_paths=PackedStringArray("music_Player")]
 custom_minimum_size = Vector2(265, 12)
+theme_override_fonts/font = ExtResource("3_d4cko")
 script = ExtResource("3_6ukbc")
 music_Player = NodePath("../../SFX")
 

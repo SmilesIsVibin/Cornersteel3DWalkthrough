@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu1oiwt353ycd"]
+[gd_scene load_steps=13 format=3 uid="uid://cu1oiwt353ycd"]
 
 [ext_resource type="Script" path="res://GDScripts/Player/player.gd" id="1_gjo2e"]
 [ext_resource type="Script" path="res://GDScripts/Player/bobbing.gd" id="2_lpiwy"]
 [ext_resource type="Script" path="res://GDScripts/Interactable/interaction.gd" id="3_d4n4i"]
 [ext_resource type="Texture2D" uid="uid://8h2xvo6d3xoi" path="res://Assets/Images/Crosshair/Crosshair 3.png" id="4_jkghp"]
 [ext_resource type="Script" path="res://GDScripts/Player/ui_control.gd" id="4_ld81f"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="6_f5ybh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nk75x"]
 resource_local_to_scene = true
@@ -168,6 +169,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_f5ybh")
 text = "Door e"
 uppercase = true
 
@@ -181,6 +183,7 @@ offset_right = 105.0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_f5ybh")
 text = "[TAB] / [SELECT] TO SHOW CONTROLS"
 
 [node name="ScreenColor" type="ColorRect" parent="PlayerInterface"]

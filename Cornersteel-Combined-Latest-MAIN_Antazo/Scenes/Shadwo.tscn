@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2xdloidy2a48"]
+[gd_scene load_steps=4 format=3 uid="uid://c2xdloidy2a48"]
 
-[ext_resource type="Script" uid="uid://64oyk7cot2ou" path="res://GDScripts/Saves/Pause-Shadow.gd" id="1_nkq7l"]
-[ext_resource type="Script" uid="uid://be0oipvf81bcc" path="res://GDScripts/UI/buttonSFX.gd" id="2_0m6tl"]
+[ext_resource type="Script" path="res://GDScripts/Saves/Pause-Shadow.gd" id="1_nkq7l"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="2_0m6tl"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="2_g60ea"]
 
 [node name="Shadow" type="Control" node_paths=PackedStringArray("Bt_txt")]
 layout_mode = 3
@@ -32,6 +33,7 @@ theme_override_constants/separation = 150
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(264, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g60ea")
 theme_override_font_sizes/font_size = 20
 text = "Shadow
 "
@@ -43,6 +45,7 @@ theme_override_constants/separation = 20
 [node name="Button" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("music_Player")]
 custom_minimum_size = Vector2(265, 12)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g60ea")
 script = ExtResource("2_0m6tl")
 music_Player = NodePath("../../SFX")
 

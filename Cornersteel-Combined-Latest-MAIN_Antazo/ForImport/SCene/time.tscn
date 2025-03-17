@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b11cnbx5ngji1"]
+[gd_scene load_steps=7 format=3 uid="uid://b11cnbx5ngji1"]
 
 [ext_resource type="Script" path="res://ForImport/ScriptForImport/time2.gd" id="1_wk5g6"]
 [ext_resource type="Texture2D" uid="uid://djp062ekicor3" path="res://pngtree-clock-face-no-hand-roboto-font-png-image_5683165.png" id="2_g42sl"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="3_dhnbk"]
 [ext_resource type="PackedScene" uid="uid://15sn2tf64h61" path="res://ForImport/SCene/clock_hand.tscn" id="3_prkpy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1tlsn"]
@@ -39,6 +40,7 @@ offset_top = 8.0
 offset_right = 158.0
 offset_bottom = 50.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_dhnbk")
 theme_override_font_sizes/font_size = 30
 text = "dadsaa"
 horizontal_alignment = 1

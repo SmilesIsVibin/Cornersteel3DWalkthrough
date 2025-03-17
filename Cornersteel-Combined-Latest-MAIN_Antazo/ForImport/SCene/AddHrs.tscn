@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ihlj8bsct7vb"]
+[gd_scene load_steps=3 format=3 uid="uid://ihlj8bsct7vb"]
 
 [ext_resource type="Script" path="res://ForImport/ScriptForImport/add_hrs.gd" id="1_mklbw"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="2_4mww0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -30,8 +31,9 @@ theme_override_constants/separation = 200
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4mww0")
 theme_override_font_sizes/font_size = 25
-text = "Hours"
+text = "Multiplier"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
@@ -40,11 +42,13 @@ theme_override_constants/separation = 50
 [node name="Minus" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4mww0")
 text = "-"
 
 [node name="Plus" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4mww0")
 text = "+"
 
 [connection signal="pressed" from="HBoxContainer/Minus" to="." method="_on_minus_pressed"]

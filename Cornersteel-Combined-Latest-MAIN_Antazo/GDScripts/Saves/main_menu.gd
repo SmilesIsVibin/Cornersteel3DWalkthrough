@@ -1,7 +1,7 @@
 extends Control
 
 @onready var option = $MainSettings as OptionMenu
-@onready var MainMenu = $VBoxContainer
+@onready var MainMenu = $Control
 @export var UIFPS : ColorRect
 var FPSUI2: bool 
 @export var nextScene: PackedScene

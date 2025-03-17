@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://doss6nk5k1lgs"]
+[gd_scene load_steps=2 format=3 uid="uid://doss6nk5k1lgs"]
+
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="1_506rr"]
 
 [node name="Actions" type="HBoxContainer"]
 anchors_preset = 10
@@ -10,6 +12,7 @@ theme_override_constants/separation = 150
 [node name="LABEL_Action" type="Label" parent="."]
 custom_minimum_size = Vector2(264, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_506rr")
 theme_override_font_sizes/font_size = 20
 text = "
 "
@@ -35,6 +38,7 @@ offset_right = 9.5
 offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_506rr")
 theme_override_font_sizes/font_size = 20
 text = "W"
 horizontal_alignment = 1

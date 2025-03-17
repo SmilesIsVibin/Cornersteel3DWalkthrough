@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://qnue1ong4d27"]
+[gd_scene load_steps=4 format=3 uid="uid://qnue1ong4d27"]
 
 [ext_resource type="Script" path="res://GDScripts/Saves/KeyBinds.gd" id="1_w0l2w"]
 [ext_resource type="PackedScene" uid="uid://doss6nk5k1lgs" path="res://Scenes/action.tscn" id="2_fds17"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="3_w2yqv"]
 
 [node name="KeyBInds" type="Control"]
 layout_mode = 3
@@ -57,6 +58,7 @@ anchor_bottom = 1.0
 offset_top = -8.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_w2yqv")
 theme_override_font_sizes/font_size = 20
 text = "Reset to Default"
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj4odese28ifh"]
+[gd_scene load_steps=3 format=3 uid="uid://bj4odese28ifh"]
 
 [ext_resource type="Script" path="res://GDScripts/Saves/vsync.gd" id="1_ffyno"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="2_hk5op"]
 
 [node name="VSync" type="Control" node_paths=PackedStringArray("Bt_txt")]
 layout_mode = 3
@@ -31,6 +32,7 @@ theme_override_constants/separation = 150
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(264, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hk5op")
 theme_override_font_sizes/font_size = 20
 text = "Vsync
 "
@@ -42,6 +44,7 @@ theme_override_constants/separation = 20
 [node name="Button" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(265, 12)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hk5op")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 volume_db = -12.0

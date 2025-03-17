@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://w0i1g6wc80jo"]
 
 [ext_resource type="Script" path="res://GDScripts/Saves/main_settings.gd" id="1_3nwd6"]
-[ext_resource type="FontFile" uid="uid://btfviyro4agja" path="res://Assets/Fonts/Square Game.otf" id="1_d1yrm"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="2_432d5"]
 [ext_resource type="PackedScene" uid="uid://bf1ogejo0mbyw" path="res://Scenes/Settings.tscn" id="2_fflc4"]
 [ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="4_pdxkf"]
 
@@ -39,7 +39,7 @@ theme_override_constants/separation = -48
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_d1yrm")
+theme_override_fonts/font = ExtResource("2_432d5")
 theme_override_font_sizes/font_size = 50
 text = "Settings"
 horizontal_alignment = 1

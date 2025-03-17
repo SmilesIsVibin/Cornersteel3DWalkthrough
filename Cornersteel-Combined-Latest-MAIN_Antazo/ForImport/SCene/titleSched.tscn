@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsphalu8q8xcm"]
+[gd_scene load_steps=3 format=3 uid="uid://dsphalu8q8xcm"]
+
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="1_frxrl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxf7v"]
 bg_color = Color(0.339, 0.339, 0.339, 0.2)
@@ -27,6 +29,7 @@ theme_override_constants/separation = 75
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(264, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_frxrl")
 theme_override_font_sizes/font_size = 20
 text = "Equipments
 "
@@ -55,6 +58,7 @@ theme_override_constants/separation = 10
 [node name="Label2" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_frxrl")
 theme_override_font_sizes/font_size = 20
 text = "Schedule
 "
@@ -83,6 +87,7 @@ theme_override_constants/separation = 10
 [node name="Label3" type="Label" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_frxrl")
 theme_override_font_sizes/font_size = 20
 text = "Status"
 horizontal_alignment = 1

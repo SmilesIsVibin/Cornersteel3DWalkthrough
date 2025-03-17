@@ -8,6 +8,7 @@ extends Control
 @export var hrs: bool
 @export var min: bool
 @export var sec: bool
+@export var multi: bool
 
 func _ready() -> void:
 	if hrs:
@@ -24,6 +25,8 @@ func _on_plus_pressed() -> void:
 		Clock.current_min += 1.0
 	elif sec:
 		Clock.current_sec += 1.0
+	elif multi: 
+		Clock.time_multiplier += 10.0
 
 func _on_minus_pressed() -> void:
 	if hrs:
@@ -38,3 +41,5 @@ func _on_minus_pressed() -> void:
 		Clock.current_sec -= 1.0
 		if Clock.current_sec < 0:
 			Clock.current_sec = 59.0
+	elif  multi:
+		Clock.time_multiplier -= 10.0

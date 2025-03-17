@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://8cwdmqt43udk"]
+[gd_scene load_steps=4 format=3 uid="uid://8cwdmqt43udk"]
 
 [ext_resource type="Script" path="res://ForImport/ScriptForImport/sched_edit.gd" id="1_lxd3f"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="2_tyfu0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0ek8"]
 bg_color = Color(0.339, 0.339, 0.339, 0.2)
@@ -30,6 +31,7 @@ theme_override_constants/separation = 70
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(264, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tyfu0")
 theme_override_font_sizes/font_size = 20
 text = "Aircon
 "
@@ -58,11 +60,13 @@ theme_override_constants/separation = 20
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 12)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tyfu0")
 alignment = 1
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tyfu0")
 theme_override_font_sizes/font_size = 20
 text = ":
 "
@@ -71,6 +75,7 @@ horizontal_alignment = 1
 [node name="LineEdit2" type="LineEdit" parent="HBoxContainer"]
 custom_minimum_size = Vector2(100, 12)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tyfu0")
 alignment = 1
 
 [node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
@@ -80,6 +85,7 @@ theme_override_constants/separation = 20
 [node name="Button" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 12)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tyfu0")
 text = "On"
 
 [connection signal="focus_entered" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_focus_entered"]
