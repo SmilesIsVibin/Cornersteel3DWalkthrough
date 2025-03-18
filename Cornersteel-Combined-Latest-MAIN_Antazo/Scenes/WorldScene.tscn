@@ -1,11 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4b1y4dqk8sy7"]
+[gd_scene load_steps=21 format=3 uid="uid://c4b1y4dqk8sy7"]
 
 [ext_resource type="PackedScene" uid="uid://cu1oiwt353ycd" path="res://Scenes/player.tscn" id="1_ss51l"]
 [ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://Scenes/fps.tscn" id="4_btjvb"]
 [ext_resource type="PackedScene" uid="uid://t4f1tatiqs2d" path="res://Scenes/Pause.tscn" id="4_ohyl4"]
 [ext_resource type="PackedScene" uid="uid://c7poqso85y7db" path="res://Scenes/Office.tscn" id="5_btjvb"]
-[ext_resource type="PackedScene" uid="uid://b11cnbx5ngji1" path="res://ForImport/SCene/time.tscn" id="6_h1rnu"]
+[ext_resource type="PackedScene" uid="uid://b11cnbx5ngji1" path="res://Scenes/Timer-Sched/time.tscn" id="6_h1rnu"]
 [ext_resource type="AudioStream" uid="uid://j3j1ulibsd2t" path="res://Assets/BackgroundTracks/lofi-beat-chill-7373.mp3" id="6_ikq1y"]
+[ext_resource type="Material" uid="uid://dpeb8fvp7i3kb" path="res://Scenes/buiding.tres" id="7_bm4ng"]
 
 [sub_resource type="Shader" id="Shader_kk134"]
 code = "
@@ -91,13 +92,13 @@ void sky() {
 	c = (v_angle - (PI * 0.5)) / (PI * 0.5);
 	vec3 ground = mix(ground_horizon_color.rgb, ground_bottom_color.rgb, clamp(1.0 - pow(1.0 - c, 1.0 / ground_curve), 0.0, 1.0));
 	ground *= ground_energy;
-	
+
 	vec2 sky_Uv = EYEDIR.xz / EYEDIR.y;
 	vec3 clouds = texture(cloudtexture,sky_Uv * cloud_scale + TIME * cloud_Direction *cloud_speed).rgb - texture(cloudtexture2, sky_Uv * cloud_scale + TIME * cloud_direction2 * cloud_speed2).rgb;
 	clouds = clouds - smoothstep(0.0, EYEDIR.y, cloud_distance);
-	clouds = clamp(clouds, 0.0, 1.0);	
+	clouds = clamp(clouds, 0.0, 1.0);
 	sky += clouds;
-	
+
 	COLOR = mix(ground, sky, step(0.0, EYEDIR.y)) * exposure;
 }
 "
@@ -121,7 +122,7 @@ noise = SubResource("FastNoiseLite_6w2gu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ihv5m"]
 shader = SubResource("Shader_kk134")
-shader_parameter/sky_top_color = Color(0.0074403, 0.0166917, 0.0622775, 1)
+shader_parameter/sky_top_color = Color(0.007, 0.017, 0.062, 1)
 shader_parameter/sky_horizon_color = Color(0, 0, 0, 1)
 shader_parameter/sky_curve = 0.15
 shader_parameter/sky_energy = 1.0
@@ -137,8 +138,8 @@ shader_parameter/cloud_Direction = null
 shader_parameter/cloud_direction2 = null
 shader_parameter/cloud_scale = Vector2(0.05, 0.05)
 shader_parameter/cloud_distance = 0.035
-shader_parameter/cloud_speed = 0.006
-shader_parameter/cloud_speed2 = 0.005
+shader_parameter/cloud_speed = 5.0
+shader_parameter/cloud_speed2 = 3.0
 shader_parameter/cloudtexture = SubResource("NoiseTexture2D_lx8co")
 shader_parameter/cloudtexture2 = SubResource("NoiseTexture2D_im4e7")
 
@@ -156,6 +157,8 @@ size = Vector3(9.81372, 8.66565, 6.76897)
 [sub_resource type="BoxMesh" id="BoxMesh_btjvb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wgc0a"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mg5kv"]
 
 [node name="WorldScene" type="Node3D"]
 
@@ -480,3 +483,10 @@ light_bake_mode = 1
 shadow_enabled = true
 shadow_reverse_cull_face = true
 omni_range = 10.0
+
+[node name="BG" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BG"]
+transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, 7, 5.266)
+mesh = SubResource("SphereMesh_mg5kv")
+surface_material_override/0 = ExtResource("7_bm4ng")

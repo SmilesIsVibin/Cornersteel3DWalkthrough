@@ -87,7 +87,7 @@ func set_ac_State() -> void:
 	if Clock.ACSwitch == 3:
 		await get_tree().create_timer(1).timeout
 		Modification_of_col()
-		Clock.counterOff()
+		Clock.counterOn()
 	elif Clock.ACSwitch == 0:
 		await get_tree().create_timer(1).timeout
 		Modification_of_col()

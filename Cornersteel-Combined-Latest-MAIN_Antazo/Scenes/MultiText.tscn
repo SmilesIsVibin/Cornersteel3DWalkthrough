@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d232jx03prsxa"]
+[gd_scene load_steps=3 format=3 uid="uid://d232jx03prsxa"]
 
-[ext_resource type="Script" path="res://ForImport/ScriptForImport/add_hrs.gd" id="1_sxn5p"]
+[ext_resource type="Script" path="res://Scenes/multi_text.gd" id="1_h0bh1"]
 [ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="2_6simr"]
-[ext_resource type="Script" path="res://GDScripts/UI/Multi_text.gd" id="3_vapgv"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,8 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_sxn5p")
-multi = true
+script = ExtResource("1_h0bh1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -28,7 +26,7 @@ offset_right = 352.0
 offset_bottom = 17.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 145
+theme_override_constants/separation = 200
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
@@ -41,27 +39,12 @@ text = "Multiplier"
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="Minus" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6simr")
-text = "-"
-
-[node name="Label2" type="Label" parent="HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(20, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6simr")
-theme_override_font_sizes/font_size = 25
-text = "00
-"
-script = ExtResource("3_vapgv")
+alignment = 1
 
-[node name="Plus" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_6simr")
-text = "+"
-
-[connection signal="pressed" from="HBoxContainer/Minus" to="." method="_on_minus_pressed"]
-[connection signal="pressed" from="HBoxContainer/Plus" to="." method="_on_plus_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_focus_entered"]
+[connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

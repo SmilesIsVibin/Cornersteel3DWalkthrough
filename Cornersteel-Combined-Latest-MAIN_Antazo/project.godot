@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Clock="*res://ForImport/ScriptForImport/Clock.gd"
+Clock="*res://GDScripts/Timer-Sched/Clock.gd"
 
 [display]
 

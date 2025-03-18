@@ -102,7 +102,7 @@ func toggle_panel():
 #---------------------------------------------- Automatic Function --------------------------------------------------------------
 #Turning off the lights
 func light_energy_low() -> void:
-	if not Clock.is_Lights_on:
+	if Clock.is_Lights_on:
 		for sw in switch:
 			sw.is_switch_on = true
 		print("LightOn")
@@ -200,7 +200,7 @@ func change_sky_color_black() -> void:
 func change_sky_color_blue() -> void:
 	target_sky_top_color = Color(0.385, 0.454, 0.55)
 	target_sky_horizon_color = Color(0.646, 0.656, 0.67)
-	target_ground_bottom_color = Color(0.2, 0.169, 0.133)
+	target_ground_bottom_color = Color(0.204, 0.25, 0.313)
 	target_ground_horizon_color = Color(0.646, 0.656, 0.67)
 	start_sky_transition()
 

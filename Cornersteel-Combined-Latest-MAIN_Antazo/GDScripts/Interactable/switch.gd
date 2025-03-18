@@ -9,28 +9,29 @@ extends "res://GDScripts/Interactable/interactable.gd"
 
 @onready var audio_player := $AudioStreamPlayer3D # Reference to the audio player 3d
 
-var is_switch_on := true # Tracks the current state of the switch
+var is_switch_on := false # Tracks the current state of the switch
+func _ready() -> void:
+	toggle_light()
 
 func _on_interacted(body: Variant) -> void:
 	Switch_ON_OFF()
 	play_audio()
 
 func _process(delta: float) -> void:
-	if is_switch_on:
 		toggle_light()
-	else:
-		toggle_light()
+		
 
 func toggle_light():
 	 # Plays the audio clip in the audio stream player
-	
+	print(Clock.is_Lights_on)
+	print("switch:" , is_switch_on)
 	 # Only call this function when theres light object in the array
 	if lights_group.size() <= 0 : return
 	
 	if is_switch_on:
-		set_light_state(0)
-	else:
 		set_light_state(light_energy)
+	else:
+		set_light_state(0)
 		
 	 # Update the switch state
 
@@ -45,13 +46,12 @@ func Switch_ON_OFF() -> void:
 	
 	if Clock.Lights_Switch == 3:
 		await get_tree().create_timer(1).timeout
-		delay()
+		Clock.counterONlight()
 	elif Clock.Lights_Switch == 0:
 		await get_tree().create_timer(1).timeout
-		delay()
+		Clock.counterOfflight()
 
-func delay() -> void:
-	Clock.counterOfflight()
+
 func set_light_state(energy_amount : float):
 	# Loop though lights array and modified each energy
 	for lights in lights_group:

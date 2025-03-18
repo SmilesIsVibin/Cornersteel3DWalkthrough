@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4odese28ifh" path="res://Scenes/VSYNC.tscn" id="5_synjs"]
 [ext_resource type="PackedScene" uid="uid://c2xdloidy2a48" path="res://Scenes/Shadwo.tscn" id="6_h62pi"]
 [ext_resource type="PackedScene" uid="uid://qnue1ong4d27" path="res://Scenes/MouseSens.tscn" id="8_aemof"]
-[ext_resource type="PackedScene" uid="uid://v66yd7frjw5t" path="res://ForImport/SCene/Clock.tscn" id="9_tyitu"]
+[ext_resource type="PackedScene" uid="uid://v66yd7frjw5t" path="res://Scenes/Timer-Sched/Clock.tscn" id="9_tyitu"]
 
 [node name="Pause" type="Control"]
 layout_mode = 3
