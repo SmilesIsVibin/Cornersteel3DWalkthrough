@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bc0xky3ha27oo"]
+
+[ext_resource type="PackedScene" uid="uid://dnw1srohn48u8" path="res://Assets/Particles/airblow_particle.tscn" id="1_awre4"]
+[ext_resource type="Script" path="res://GDScripts/Interactable/aircon.gd" id="1_uiidn"]
+[ext_resource type="AudioStream" uid="uid://c8w1j11sbh0ou" path="res://Assets/SFX/Aircon Ambience.wav" id="2_5feu6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ok4os"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7n4gy"]
+size = Vector3(2, 0.5, 2)
+
+[node name="Aircon" type="StaticBody3D"]
+script = ExtResource("1_uiidn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ok4os")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7n4gy")
+
+[node name="Airblow_Particle" parent="." instance=ExtResource("1_awre4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0250812, -0.0286784, 0.0174956)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_5feu6")
+max_distance = 10.0
