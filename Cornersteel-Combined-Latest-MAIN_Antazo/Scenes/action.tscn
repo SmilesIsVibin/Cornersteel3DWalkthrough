@@ -3,10 +3,14 @@
 [ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="1_506rr"]
 
 [node name="Actions" type="HBoxContainer"]
-anchors_preset = 10
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-offset_bottom = 28.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 150
 
 [node name="LABEL_Action" type="Label" parent="."]

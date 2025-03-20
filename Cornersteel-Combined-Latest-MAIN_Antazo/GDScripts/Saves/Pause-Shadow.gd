@@ -2,13 +2,11 @@ extends Control
 
 
 @export var Bt_txt : Button
+@onready var light2 = $"../../../../.."
 
 var FPSOn: bool = true
-
-@onready var light2 = $"../../../../.."
-#@export var light = DirectionalLight3D
 var save_path: String = "user://settings.json"
-#signal FPS_OFF
+
 
 func _ready() -> void:
 	load_settings()

@@ -55,6 +55,7 @@ theme_override_colors/font_hover_color = Color(0.539663, 0.539663, 0.539663, 1)
 theme_override_colors/font_pressed_color = Color(0.764385, 0.31273, 1.92523e-07, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_432d5")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dpakm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3w7pf")

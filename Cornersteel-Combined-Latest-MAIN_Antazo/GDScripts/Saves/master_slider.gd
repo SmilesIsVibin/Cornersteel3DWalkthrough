@@ -1,15 +1,15 @@
-
 class_name AudioSave
 extends Control
 
-@onready var name_ = $HBoxContainer/Label as Label
-@onready var slider_ = $HBoxContainer/HSlider as HSlider
+@onready var name_ = $HBoxContainer/Label as Label #Name uses in the Scene
+@onready var slider_ = $HBoxContainer/HSlider as HSlider #get Slider in the Scene
 
-@export_enum("Master", "MUSIC", "SFX") var bus_name: String
+@export_enum("Master", "MUSIC", "SFX") var bus_name: String #Getting Name of the Bus
 
-var bus_index: int = 0
-const SAVE_PATH = "user://settings.json"
+var bus_index: int = 0 #Bus Count
+const SAVE_PATH = "user://settings.json" #Saving Path
 
+#Star Function
 func _ready() -> void:
 	get_busname()
 	set_name_Label()
@@ -17,15 +17,19 @@ func _ready() -> void:
 	set_slider()
 	slider_.value_changed.connect(on_changed)
 
+#Setting Up Name
 func set_name_Label() -> void:
 	name_.text = str(bus_name) + " Volume"
-	
+
+#Getting the Set bus name
 func get_busname() -> void:
 	bus_index = AudioServer.get_bus_index(bus_name)
 
+#Set Slider base on the bus volume
 func set_slider() -> void:
 	slider_.value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 
+#When the slider change it changes the bus volume
 func on_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	save_audio_settings()  # Save the new value when changed
