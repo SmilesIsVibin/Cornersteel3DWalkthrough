@@ -15,7 +15,7 @@ extends "res://GDScripts/Interactable/interactable.gd"
 
 var current_temperature: float = 0.0 # Tracks the current temperature
 var target_temperature : float = 0.0
-var is_acu_off: bool = true  # Tracks if the AC control panel is off or on
+var is_acu_off: bool = false  # Tracks if the AC control panel is off or on
 var is_toggling: bool = false  # Prevents rapid toggling
 var can_interact : bool = true # Add Delay before toggling again
 
@@ -23,7 +23,7 @@ var can_interact : bool = true # Add Delay before toggling again
 func _ready() -> void:
 	# Initialize temperature from the start
 	initialize_temperatures()
-	
+	toggle_aircon_panel()
 	# Set the prompt text in the start
 	update_prompt_text("AIRCON PANEL" + "\n[" + "E" + "]")
 	
@@ -31,24 +31,28 @@ func _process(delta: float) -> void:
 	update_temperature_text(delta)
 	
 func _on_interacted(body: Variant) -> void:
-	play_audio()	
+	new_ac_state()
+	play_audio()
+	interactio_mod()
 	toggle_all_aircons(is_acu_off)
 	toggle_aircon_panel()
 
 	# ---------------------- AIRCON RELATED FUNCTIONS ---------------------
 func toggle_aircon_panel():
+	update_current_state()
+
+func new_call():
+	toggle_all_aircons(is_acu_off)
+	toggle_aircon_panel()
+
+func interactio_mod() -> void:
 	if is_toggling or not can_interact:
 		return  # Prevent spamming and disable interaction during cooldown
-	
 	enable_interaction(false)
-	update_current_state()
 	update_prompt_text("")
-	
-	# Wait for the delay before allowing interaction again
 	await get_tree().create_timer(toggle_delay).timeout
 	enable_interaction(true)
 	update_prompt_text("AIRCON PANEL" + "\n[" + "E" + "]")
-	
 func update_temperature_text(delta):
 	# Smoothly transition between 25 to 30C
 	current_temperature = lerp(current_temperature, target_temperature, 3.0 * delta)
@@ -63,7 +67,7 @@ func initialize_temperatures():
 	target_temperature = current_temperature
 	
 	# Make sure that the AC units is on by default
-	is_acu_off = true
+	is_acu_off = false
 	
 
 	# ---------------------- UTILITY FUNCTIONS ---------------------
@@ -77,9 +81,23 @@ func update_current_state():
 		target_temperature = cooled_temperature
 	else:
 		target_temperature = default_temperature
-		
-	is_acu_off = !is_acu_off # Update toggle state
 	
+func new_ac_state() -> void:
+	is_acu_off = !is_acu_off
+	print(Clock.ACSwitch)
+	if is_acu_off:
+		Clock.ACSwitch += 1
+	else:
+		Clock.ACSwitch -= 1
+	if Clock.ACSwitch == 3:
+		await get_tree().create_timer(1).timeout
+		interactio_mod()
+		Clock.counterOn()
+	elif Clock.ACSwitch == 0:
+		await get_tree().create_timer(1).timeout
+		interactio_mod()
+		Clock.counterOff()
+
 func update_prompt_text(text : String):
 	prompt_message = text
 	

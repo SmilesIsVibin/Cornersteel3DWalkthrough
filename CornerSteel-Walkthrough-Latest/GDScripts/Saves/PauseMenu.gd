@@ -17,6 +17,7 @@ var target_ground_horizon_color: Color
 var interactable : Node3D
 var Switch_parent : Node3D
 var AC_Parent : Node3D
+var AC_Manager : Area3D
 var switch : Array
 var ACSwitch : Array
 
@@ -119,21 +120,22 @@ func monitor_On_OFf() -> void:
 			PC.visible = true
 #turning off the AC
 func Ac_ON_OFF() -> void:
-	print(Clock.is_Ac_on)
 	if not Clock.is_Ac_on:
 		for ACS in ACSwitch:
 			ACS.is_acu_off = false
-			ACS.toggle_aircon_panel()
+			ACS.new_call()
+		
 	else:
 		for ACS in ACSwitch:
 			ACS.is_acu_off = true
-			ACS.toggle_aircon_panel()
+			ACS.new_call()
 
 #get all the need variables for the pause menu
 func get_equipment()-> void:
 	interactable =  WORLD.get_node("Interactables")
 	Switch_parent = interactable.get_node("Switches")
 	AC_Parent = interactable.get_node("Aircon Panels")
+	AC_Manager = WORLD.get_node("Collision Area")
 	switch = Switch_parent.get_children()
 	ACSwitch = AC_Parent.get_children()
 

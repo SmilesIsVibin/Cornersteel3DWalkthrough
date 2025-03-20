@@ -66,7 +66,9 @@ func get_player_node():
 	screen_color = players[0].get_node("PlayerInterface/ScreenColor")
 	
 func _on_body_entered(body: Node3D) -> void:
-	is_player_inside = true
+	if body.is_in_group("Player"):
+		is_player_inside = true
 	
 func _on_body_exited(body: Node3D) -> void:
-	is_player_inside = false
+	if body.is_in_group("Player"):
+		is_player_inside = false

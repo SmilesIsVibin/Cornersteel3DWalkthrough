@@ -1,6 +1,6 @@
 extends Control
 
-@onready var button_scene = preload("res://Scenes/action.tscn") #INstance he button in the scene
+@onready var button_scene = preload("res://Scenes/UI/action.tscn") #INstance he button in the scene
 @onready var action_list = $MarginContainer/VBoxContainer/ScrollContainer/Action #Get the location where to instantiate the buttons
 
 var is_remapping = false

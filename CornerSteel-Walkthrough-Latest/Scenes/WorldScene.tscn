@@ -1,12 +1,12 @@
 [gd_scene load_steps=21 format=3 uid="uid://c4b1y4dqk8sy7"]
 
 [ext_resource type="PackedScene" uid="uid://cu1oiwt353ycd" path="res://Scenes/player.tscn" id="1_ss51l"]
-[ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://Scenes/fps.tscn" id="4_btjvb"]
-[ext_resource type="PackedScene" uid="uid://t4f1tatiqs2d" path="res://Scenes/Pause.tscn" id="4_ohyl4"]
+[ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://Scenes/UI/fps.tscn" id="4_btjvb"]
+[ext_resource type="PackedScene" uid="uid://t4f1tatiqs2d" path="res://Scenes/UI/Pause.tscn" id="4_ohyl4"]
 [ext_resource type="PackedScene" uid="uid://c7poqso85y7db" path="res://Scenes/Office.tscn" id="5_btjvb"]
 [ext_resource type="PackedScene" uid="uid://b11cnbx5ngji1" path="res://Scenes/Timer-Sched/time.tscn" id="6_h1rnu"]
 [ext_resource type="AudioStream" uid="uid://j3j1ulibsd2t" path="res://Assets/BackgroundTracks/lofi-beat-chill-7373.mp3" id="6_ikq1y"]
-[ext_resource type="Material" uid="uid://dpeb8fvp7i3kb" path="res://Scenes/buiding.tres" id="7_bm4ng"]
+[ext_resource type="Material" uid="uid://dpeb8fvp7i3kb" path="res://Assets/buiding.tres" id="7_bm4ng"]
 
 [sub_resource type="Shader" id="Shader_kk134"]
 code = "

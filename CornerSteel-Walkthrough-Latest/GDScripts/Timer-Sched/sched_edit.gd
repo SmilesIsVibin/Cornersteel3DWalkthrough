@@ -142,10 +142,10 @@ func BTN_On_Off() -> void:
 func bttnChanger() -> void:
 	if AC && close || AC && Open:
 		if Clock.is_Ac_on:
-			Clock.ACSwitch = 3
+			Clock.ACSwitch = 0
 			Clock.is_Ac_on = false
 		else:
-			Clock.ACSwitch = 0
+			Clock.ACSwitch = 3
 			Clock.is_Ac_on = true
 	elif Lights && close ||Lights && Open:
 		if Clock.is_Lights_on:

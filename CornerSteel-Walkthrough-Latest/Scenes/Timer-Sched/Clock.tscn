@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ihlj8bsct7vb" path="res://Scenes/Timer-Sched/AddHrs.tscn" id="4_rint2"]
 [ext_resource type="PackedScene" uid="uid://dsphalu8q8xcm" path="res://Scenes/Timer-Sched/titleSched.tscn" id="5_6aqao"]
 [ext_resource type="PackedScene" uid="uid://8cwdmqt43udk" path="res://Scenes/Timer-Sched/SchedEdit.tscn" id="6_jmp8s"]
-[ext_resource type="PackedScene" uid="uid://d232jx03prsxa" path="res://Scenes/MultiText.tscn" id="6_k15tr"]
+[ext_resource type="PackedScene" uid="uid://d232jx03prsxa" path="res://Scenes/UI/MultiText.tscn" id="6_k15tr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1vh"]
 bg_color = Color(0.121569, 0.121569, 0.121569, 1)
