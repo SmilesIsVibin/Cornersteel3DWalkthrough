@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://8e4cse562kxx"]
+
+[ext_resource type="PackedScene" uid="uid://bfxvjge4avgn5" path="res://Scenes/UI/Stats.tscn" id="1_3saj1"]
+[ext_resource type="Script" path="res://GDScripts/Saves/window_mode.gd" id="2_4dplk"]
+[ext_resource type="Script" path="res://GDScripts/UI/buttonSFX.gd" id="3_6ukbc"]
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="3_d4cko"]
+
+[node name="WindowMode" instance=ExtResource("1_3saj1")]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_bottom = 0.5
+size_flags_horizontal = 4
+script = ExtResource("2_4dplk")
+
+[node name="HBoxContainer" parent="." index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -424.5
+offset_top = -14.0
+offset_right = 424.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 150
+
+[node name="Label" parent="HBoxContainer" index="0"]
+theme_override_fonts/font = ExtResource("3_d4cko")
+theme_override_font_sizes/font_size = 20
+text = "Display"
+
+[node name="VSeparator" parent="HBoxContainer" index="1"]
+theme_override_constants/separation = 20
+
+[node name="OptionButton" parent="HBoxContainer" index="2" node_paths=PackedStringArray("music_Player")]
+custom_minimum_size = Vector2(265, 12)
+theme_override_fonts/font = ExtResource("3_d4cko")
+script = ExtResource("3_6ukbc")
+music_Player = NodePath("../../SFX")
+
+[node name="SFX" type="AudioStreamPlayer" parent="." index="1"]
+volume_db = -12.0
+autoplay = true
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="HBoxContainer/OptionButton" to="HBoxContainer/OptionButton" method="_on_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/OptionButton" to="HBoxContainer/OptionButton" method="_on_pressed"]

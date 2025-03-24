@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfmnc6bxl1css"]
+
+[ext_resource type="Script" path="res://GDScripts/Interactable/aircon_panel.gd" id="1_v3xyu"]
+[ext_resource type="Script" path="res://GDScripts/Interactable/outline.gd" id="2_4elnm"]
+[ext_resource type="AudioStream" uid="uid://qkg83byc4ksa" path="res://Assets/SFX/switch_01.wav" id="2_67e7y"]
+[ext_resource type="Material" uid="uid://dbx1dj7rysohs" path="res://Assets/Materials/outline_material.tres" id="3_b4anw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xobre"]
+size = Vector3(0.219177, 0.924561, 0.711792)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x06o4"]
+size = Vector3(0.2, 0.7, 0.7)
+
+[node name="Aircon_Panel" type="StaticBody3D" groups=["AC_Units"]]
+script = ExtResource("1_v3xyu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.0109553, 0.00595093, -0.000778198)
+shape = SubResource("BoxShape3D_xobre")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.769, 0, 0, 0, 1, 0, 0, 0, 0.769, 0, 0, 0)
+mesh = SubResource("BoxMesh_x06o4")
+script = ExtResource("2_4elnm")
+outline_material = ExtResource("3_b4anw")
+
+[node name="TemperatureText" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 3.82137e-15, 0.06, 8.74228e-08, 1, 0, 1, -8.74228e-08, 2.62268e-09, -0.100584, 0.0494524, 0)
+outline_modulate = Color(0.17881, 0.17881, 0.17881, 1)
+text = "30"
+font_size = 28
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_67e7y")
+bus = &"SFX"
+
+[connection signal="interacted" from="." to="." method="_on_interacted"]

@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://ckoou3r1yptce"
+path.s3tc="res://.godot/imported/CornersteelOffice-HQ_wood__normal.jpg-cfc5de7bc2b6c8f80d7173c12fbdf4c6.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "79f1be316bc52560360de68442e26dba"
+}
+
+[deps]
+
+source_file="res://Assets/CornersteelOffice-HQ_wood__normal.jpg"
+dest_files=["res://.godot/imported/CornersteelOffice-HQ_wood__normal.jpg-cfc5de7bc2b6c8f80d7173c12fbdf4c6.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Assets/CornersteelOffice-HQ_wood__normal.jpg"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

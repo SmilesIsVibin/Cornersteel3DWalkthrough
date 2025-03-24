@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://v8pquw0eiqcg"]
+
+[ext_resource type="PackedScene" uid="uid://b8nqtm30wlseb" path="res://Video/CornersteelOffice-HQ.glb" id="1_jtnho"]
+
+[node name="CornersteelOffice-HQ" instance=ExtResource("1_jtnho")]

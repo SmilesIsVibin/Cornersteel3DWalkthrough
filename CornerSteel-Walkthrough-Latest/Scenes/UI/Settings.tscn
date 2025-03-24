@@ -1,0 +1,219 @@
+[gd_scene load_steps=11 format=3 uid="uid://bf1ogejo0mbyw"]
+
+[ext_resource type="FontFile" uid="uid://blcvqf1n1utnc" path="res://Assets/Fonts/times new roman.ttf" id="1_2rtcn"]
+[ext_resource type="PackedScene" uid="uid://8e4cse562kxx" path="res://Scenes/UI/window_mode.tscn" id="2_c4kik"]
+[ext_resource type="PackedScene" uid="uid://d0y00m2x664om" path="res://Scenes/UI/MasterSlider.tscn" id="2_vnn7b"]
+[ext_resource type="PackedScene" uid="uid://d4dxdhs8spohl" path="res://Scenes/UI/reso_.tscn" id="3_0a7lx"]
+[ext_resource type="PackedScene" uid="uid://dy3th0rod80kb" path="res://Scenes/UI/fps_buttons.tscn" id="4_eavex"]
+[ext_resource type="PackedScene" uid="uid://bj4odese28ifh" path="res://Scenes/UI/VSYNC.tscn" id="6_ov011"]
+[ext_resource type="PackedScene" uid="uid://qnue1ong4d27" path="res://Scenes/UI/MouseSens.tscn" id="7_n2mtq"]
+[ext_resource type="PackedScene" uid="uid://c2xdloidy2a48" path="res://Scenes/UI/Shadwo.tscn" id="7_p6hi2"]
+[ext_resource type="Script" path="res://GDScripts/Saves/Settings-Shadow.gd" id="7_vpk63"]
+
+[sub_resource type="GDScript" id="GDScript_jbni2"]
+script/source = "extends Control
+
+@onready var MainMenu = get_node(\"/root/MainMenu\")  # Adjust the path based on your scene hierarchy
+var FPSUI: bool = false
+@export var light2: DirectionalLight3D
+var light1: bool = false
+
+# Function to modify FPSUI from FPSToggle
+func set_fps_ui(value: bool) -> void:
+	FPSUI = value
+	print(\"FPSUI set to:\", FPSUI)
+
+func set_light_off(value: bool) -> void:
+	light1 = value
+	print(\"light1 set to:\", light1)
+
+func _process(_delta: float) -> void:
+	UI_Set_MainMenu()
+	
+func _light_off() -> void:
+	if light1:
+		light2.shadow_enabled = true
+	else:
+		light2.shadow_enabled = false
+# Function to interact with MainMenu
+func UI_Set_MainMenu() -> void:
+	if MainMenu:
+		MainMenu.set_fps_ui1(FPSUI)
+	else:
+		print(\"Error: MainMenu node not found!\")
+"
+
+[node name="Settings" type="Control" node_paths=PackedStringArray("light2")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_jbni2")
+light2 = NodePath("DirectionalLight3D")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = -150.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+tab_alignment = 1
+current_tab = 0
+
+[node name="Sounds" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sounds/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="SliderMaster" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Music" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+layout_mode = 2
+size_flags_horizontal = 4
+bus_name = "MUSIC"
+
+[node name="SFX" parent="TabContainer/Sounds/MarginContainer/VBoxContainer" instance=ExtResource("2_vnn7b")]
+layout_mode = 2
+size_flags_horizontal = 4
+bus_name = "SFX"
+
+[node name="Video" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Video/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 65
+alignment = 1
+
+[node name="WindowMode" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("2_c4kik")]
+layout_mode = 2
+
+[node name="Reso_" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("3_0a7lx")]
+layout_mode = 2
+size_flags_horizontal = 1
+
+[node name="Stats" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("4_eavex")]
+layout_mode = 2
+
+[node name="Vsync" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("6_ov011")]
+layout_mode = 2
+
+[node name="Shadow" parent="TabContainer/Video/MarginContainer/VBoxContainer" instance=ExtResource("7_p6hi2")]
+layout_mode = 2
+script = ExtResource("7_vpk63")
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+metadata/_tab_index = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="KeyBInds" parent="TabContainer/Controls/MarginContainer" instance=ExtResource("7_n2mtq")]
+layout_mode = 2
+
+[node name="Credits" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Credits"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="TabContainer/Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+theme_override_font_sizes/font_size = 20
+text = "Members:"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="TabContainer/Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+theme_override_font_sizes/font_size = 20
+text = "Antazo, Harvey "
+
+[node name="Label4" type="Label" parent="TabContainer/Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+theme_override_font_sizes/font_size = 20
+text = "Dumaraos, Mark Joseph"
+
+[node name="Label2" type="Label" parent="TabContainer/Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+theme_override_font_sizes/font_size = 20
+text = "Tanhueco, Jejomar Floren"
+
+[node name="Label5" type="Label" parent="TabContainer/Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2rtcn")
+theme_override_font_sizes/font_size = 20
+text = "Prynze"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

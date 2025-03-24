@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlhrauupcihme"]
+
+[ext_resource type="PackedScene" uid="uid://cig6jdopat22v" path="res://Scenes/UI/fps.tscn" id="1_84kkc"]
+[ext_resource type="PackedScene" uid="uid://t4f1tatiqs2d" path="res://Scenes/UI/Pause.tscn" id="2_ehq8x"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bfea4"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_s7ql3"]
+sky_material = SubResource("ProceduralSkyMaterial_bfea4")
+
+[sub_resource type="Environment" id="Environment_cvcne"]
+background_mode = 2
+sky = SubResource("Sky_s7ql3")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_j4diw"]
+size = Vector3(5, 0.1, 5)
+
+[node name="Level1" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cvcne")
+
+[node name="FPS" parent="." instance=ExtResource("1_84kkc")]
+
+[node name="Pause" parent="." node_paths=PackedStringArray("light2", "fps_rect") instance=ExtResource("2_ehq8x")]
+light2 = NodePath("../DirectionalLight3D")
+fps_rect = NodePath("../FPS")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_j4diw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07753, 1.47487)
